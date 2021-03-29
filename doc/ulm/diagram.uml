@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="18.0" y="0.0">fr.utbm.lp2a.cloarec_durr.game.PositionConstants</node>
+    <node x="0.0" y="170.0">fr.utbm.lp2a.cloarec_durr.game.Position</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="fr.utbm.lp2a.cloarec_durr.game.Position" target="fr.utbm.lp2a.cloarec_durr.game.PositionConstants">
+      <point x="0.0" y="-83.0" />
+      <point x="0.0" y="60.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="776.0" y="135.0" />
+  <SelectedNodes>
+    <node>fr.utbm.lp2a.cloarec_durr.game.Position</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Inner Classes</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
