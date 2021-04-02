@@ -1,12 +1,17 @@
-package fr.utbm.lp2a.cloarec_durr.game;
+package fr.utbm.lp2a.cloarec_durr.game.items.coordinates;
 
 import java.awt.*;
 
 public class Position {
     private int progress;
     private Color playerColor;
-    //Square value;
 
+    public static void main(String[] args) {
+        Position pos = new Position(25, Color.GREEN);
+        System.out.println(pos);
+        System.out.println(pos.convertPositionColor(Color.BLUE));
+
+    }
 
     public Position(int progress, Color playerColor) {
         this.progress = progress;
@@ -42,8 +47,16 @@ public class Position {
             return new Position(this.progress + n, this.playerColor);
         }
         else{
-            return this;
+            return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "progress=" + progress +
+                ", playerColor=" + playerColor +
+                '}';
     }
 
     public static int playerOrder(Color color){ //move it in the right class
@@ -64,8 +77,24 @@ public class Position {
         }
     }
 
-    public Position convertPositionColor(Position source, Color destination){
-        return new Position(((playerOrder(source.getPlayerColor()) - playerOrder(destination)%4)*PositionConstants.DELTA)%PositionConstants.ONE_TURN, destination);
+    public Position convertPositionColor(Color destination){
+        int sourceNumber = playerOrder(this.getPlayerColor());
+        int destinationNumber = playerOrder(destination);
+        int sourcePosition = this.getProgress();
+        if (sourcePosition >=0 && sourcePosition <= PositionConstants.ONE_TURN - 2){
+            int progress = (((sourceNumber -destinationNumber)%4)*PositionConstants.DELTA + sourcePosition)%PositionConstants.ONE_TURN;
+            if (progress == PositionConstants.STABLE){
+                return null;
+            }
+            else{
+                return new Position(progress, destination);
+            }
+
+        }
+        else {
+            return null;
+        }
+
 
     }
 
