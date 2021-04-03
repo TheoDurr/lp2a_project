@@ -38,7 +38,7 @@ public class Position {
         return new Position(PositionConstants.HOME, this.playerColor);
     }
 
-    public Position getStartPosition(){
+    public Position getStablePosition(){
         return new Position(PositionConstants.START, this.playerColor);
     }
 

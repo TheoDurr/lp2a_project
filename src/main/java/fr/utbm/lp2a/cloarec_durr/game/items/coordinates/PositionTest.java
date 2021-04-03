@@ -15,7 +15,7 @@ class PositionTest {
     @org.junit.jupiter.api.Test
     void getStartPosition() {
         Position pos = new Position(0, Color.BLUE);
-        assertEquals(0, pos.getStartPosition().getProgress());
+        assertEquals(0, pos.getStablePosition().getProgress());
     }
 
     @org.junit.jupiter.api.Test
