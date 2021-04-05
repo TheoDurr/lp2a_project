@@ -1,8 +1,8 @@
-package fr.utbm.lp2a.cloarec_durr.game.players;
+package fr.utbm.lp2a.cloarec_durr.ludo.game.players;
 
-import fr.utbm.lp2a.cloarec_durr.game.items.Dice;
-import fr.utbm.lp2a.cloarec_durr.game.items.Piece;
-import fr.utbm.lp2a.cloarec_durr.game.items.coordinates.PositionConstants;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Dice;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants;
 
 import java.awt.*;
 import java.util.ArrayList;

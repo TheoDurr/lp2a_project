@@ -1,4 +1,4 @@
-package fr.utbm.lp2a.cloarec_durr.game.items.coordinates;
+package fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates;
 
 public final class PositionConstants {
     public static final int STABLE = -1;

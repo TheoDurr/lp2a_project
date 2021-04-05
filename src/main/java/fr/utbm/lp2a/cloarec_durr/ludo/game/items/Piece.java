@@ -1,7 +1,7 @@
-package fr.utbm.lp2a.cloarec_durr.game.items;
+package fr.utbm.lp2a.cloarec_durr.ludo.game.items;
 
-import fr.utbm.lp2a.cloarec_durr.game.items.coordinates.Position;
-import fr.utbm.lp2a.cloarec_durr.game.items.coordinates.PositionConstants;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.Position;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants;
 
 import java.awt.*;
 

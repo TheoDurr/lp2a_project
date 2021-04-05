@@ -1,4 +1,4 @@
-package fr.utbm.lp2a.cloarec_durr.game.items;
+package fr.utbm.lp2a.cloarec_durr.ludo.game.items;
 
 import java.util.Random;
 
