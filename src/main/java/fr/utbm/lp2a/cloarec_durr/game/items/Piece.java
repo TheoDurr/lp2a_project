@@ -36,32 +36,32 @@ public class Piece {
         this.color = color;
     }
 
-    boolean isAtStable(){
+    public boolean isAtStable(){
         return this.getPosition().getProgress() == PositionConstants.STABLE;
     }
 
-    boolean isAtHome(){
+    public boolean isAtHome(){
         return this.getPosition().getProgress() == PositionConstants.HOME;
     }
 
-    boolean isAtStar(){
+    public boolean isAtStar(){
         return this.getPosition().getProgress()%PositionConstants.DELTA == PositionConstants.STAR;
     }
 
-    boolean isAtColoredSquare(){
+    public boolean isAtColoredSquare(){
         int progress = this.getPosition().getProgress();
         return progress % PositionConstants.DELTA == PositionConstants.START || progress < PositionConstants.ARROW;
     }
 
-    void moveForward(int progress){
+    public void moveForward(int progress){
         this.setPosition(this.getPosition().getForwardPosition(progress));
     }
 
-    void moveAtStable(){
+    public void moveAtStable(){
         this.setPosition(this.getPosition().getStablePosition());
     }
 
-    boolean isImmune(){
+    public boolean isImmune(){
         return this.isAtStar() || this.isAtColoredSquare();
     }
 
