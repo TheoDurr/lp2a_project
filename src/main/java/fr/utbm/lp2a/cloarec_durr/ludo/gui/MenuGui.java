@@ -5,10 +5,24 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 
-public class MainMenu extends JFrame implements ActionListener, ItemListener{
+public class MenuGui extends JFrame implements ActionListener{
 
-    public MainMenu(){
+    String pseudo;
+    GameMode mode;
+
+    JRadioButton oneHumanVersusThreeArtificialIntelligence;
+    JRadioButton fourHumans;
+    JRadioButton fourArtificialIntelligence;
+    JTextField fieldPseudo;
+    JButton playButton;
+
+
+
+    public MenuGui(){
         super("LUDO GAME");
+
+        this.pseudo = "Player 1";
+        this.mode = GameMode.oneHumanVersusTreeArtificialIntelligence;
 
         /* import the icon*/
         ImageIcon icon = new ImageIcon("src/main/resources/ludo_game_board.png");
@@ -42,24 +56,22 @@ public class MainMenu extends JFrame implements ActionListener, ItemListener{
         /* Create a group of radio button and add all the button in the group and in the panel */
         ButtonGroup modeSelection = new ButtonGroup();
 
-        JRadioButton oneHumanVersusThreeArtificialIntelligence = new JRadioButton("One Human Versus Three Artificial Intelligence");
+        this.oneHumanVersusThreeArtificialIntelligence = new JRadioButton("One Human Versus Three Artificial Intelligence");
         oneHumanVersusThreeArtificialIntelligence.setSelected(true);
         modeSelection.add(oneHumanVersusThreeArtificialIntelligence);
         panelModeSelection.add(oneHumanVersusThreeArtificialIntelligence);
         oneHumanVersusThreeArtificialIntelligence.addActionListener(this);
-        oneHumanVersusThreeArtificialIntelligence.addItemListener(this);
 
-        JRadioButton fourHumans = new JRadioButton("Four Humans");
+        this.fourHumans = new JRadioButton("Four Humans");
         modeSelection.add(fourHumans);
         panelModeSelection.add(fourHumans);
         fourHumans.addActionListener(this);
-        fourHumans.addItemListener(this);
 
-        JRadioButton fourArtificialIntelligence = new JRadioButton("Four Artificial Intelligence");
+        this.fourArtificialIntelligence = new JRadioButton("Four Artificial Intelligence");
         modeSelection.add(fourArtificialIntelligence);
         panelModeSelection.add(fourArtificialIntelligence);
         fourArtificialIntelligence.addActionListener(this);
-        fourArtificialIntelligence.addItemListener(this);
+
 
         /* add the mode selection panel to the main panel*/
         mainPanel.add(panelModeSelection, BorderLayout.CENTER);
@@ -70,15 +82,17 @@ public class MainMenu extends JFrame implements ActionListener, ItemListener{
         JLabel labelPseudo = new JLabel("Pseudo :");
         panelPseudoSelection.add(labelPseudo);
 
-        JTextField pseudo = new JTextField();
-        panelPseudoSelection.add(pseudo);
+        this.fieldPseudo = new JTextField();
+        fieldPseudo.addActionListener(this);
+
+        panelPseudoSelection.add(fieldPseudo);
 
         mainPanel.add(panelPseudoSelection);
 
 
 
         /* create the play button */
-        JButton playButton = new JButton("PLAY !");
+        this.playButton = new JButton("PLAY !");
         playButton.addActionListener(this);
         mainPanel.add(playButton);
 
@@ -98,16 +112,40 @@ public class MainMenu extends JFrame implements ActionListener, ItemListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("click on the button : " + e.getActionCommand());
+        Object source = e.getSource();
+        if (source == this.playButton){
+            this.dispose();
+        }
+
+        if (source == this.oneHumanVersusThreeArtificialIntelligence){
+            this.mode = GameMode.oneHumanVersusTreeArtificialIntelligence;
+        }
+
+        if (source == this.fourHumans){
+            this.mode = GameMode.fourHumans;
+        }
+
+        if (source == this.fourArtificialIntelligence){
+            this.mode = GameMode.fourArtificialIntelligence;
+        }
+
+        if (source == this.fieldPseudo){
+            this.pseudo = this.fieldPseudo.getText();
+        }
+
+
+
+
 
     }
 
-    @Override
-    public void itemStateChanged(ItemEvent e) {
-        System.out.print("Bouton " + ((JRadioButton) e.getItem()).getActionCommand());
-        if (e.getStateChange() == ItemEvent.DESELECTED)
-            System.out.println(" deselectionne");
-        if (e.getStateChange() == ItemEvent.SELECTED)
-            System.out.println(" selectionne");
-
+    public String getPseudo() {
+        return pseudo;
     }
+
+    public GameMode getMode() {
+        return mode;
+    }
+
+
 }
