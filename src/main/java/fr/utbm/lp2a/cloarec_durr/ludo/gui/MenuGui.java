@@ -49,7 +49,7 @@ public class MenuGui extends JFrame implements ActionListener{
 
 
         /* Create the panel for game mode choose */
-        JPanel panelModeSelection = new JPanel(new GridLayout(0,1));
+        JPanel panelModeSelection = new JPanel(new GridLayout(3,1));
         Border border = BorderFactory.createTitledBorder("Game Mode");
         panelModeSelection.setBorder(border);
 
@@ -111,7 +111,7 @@ public class MenuGui extends JFrame implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("click on the button : " + e.getActionCommand());
+        //System.out.println("click on the button : " + e.getActionCommand());
         Object source = e.getSource();
         if (source == this.playButton){
             this.dispose();
@@ -130,6 +130,7 @@ public class MenuGui extends JFrame implements ActionListener{
         }
 
         if (source == this.fieldPseudo){
+            assert this.fieldPseudo != null;
             this.pseudo = this.fieldPseudo.getText();
         }
 
