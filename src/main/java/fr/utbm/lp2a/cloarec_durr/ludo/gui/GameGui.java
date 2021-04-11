@@ -23,8 +23,11 @@ public class GameGui extends JFrame implements ActionListener {
     JRadioButton piece3;
     JRadioButton piece4;
     JRadioButton pass;
+    int pieceChoose;
 
     JButton playButton;
+
+    JLabel messageBox;
 
 
 
@@ -105,6 +108,12 @@ public class GameGui extends JFrame implements ActionListener {
         playButton.addActionListener(this);
         mainPanel.add(playButton);
 
+        /* create the message box */
+        this.messageBox = new JLabel("Let the game start");
+        border = BorderFactory.createTitledBorder("Message");
+        messageBox.setBorder(border);
+        mainPanel.add(messageBox);
+
 
 
 
@@ -129,6 +138,49 @@ public class GameGui extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        System.out.println("click on the button : " + e.getActionCommand());
+        //System.out.println("click on the button : " + e.getActionCommand());
+        Object source = e.getSource();
+        
+        if (source == this.playButton){
+            this.gameEngine.play();
+            //System.out.println("piece choose" + this.pieceChoose);
+            this.updateMessage();
+            this.updatePiecePosition();
+
+        }
+        
+        if (source == this.piece1){
+            this.pieceChoose = 1;
+        }
+
+        if (source == this.piece2){
+            this.pieceChoose = 2;
+        }
+
+        if (source == this.piece3){
+            this.pieceChoose = 3;
+        }
+
+        if (source == this.piece4){
+            this.pieceChoose = 4;
+        }
+
+        if (source == this.pass){
+            this.pieceChoose = 0;
+        }
+
+        if (source == this.trowDice){
+            this.gameEngine.trowDice();
+        }
+        
+    }
+
+    public void updateMessage(){
+        this.messageBox.setText(this.gameEngine.getMessage());
+    }
+
+    public void updatePiecePosition(){
+
+
     }
 }
