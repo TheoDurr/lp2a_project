@@ -1,5 +1,10 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.gui;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.Engine;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourAIEngine;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourHumansEngine;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.OneHumanVersusThreeAIEngine;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -7,21 +12,27 @@ import java.awt.event.*;
 
 public class MenuGui extends JFrame implements ActionListener{
 
-    private String pseudo;
+    private String[] pseudos;
     private GameMode mode;
+    private Engine gameEngine;
 
-    private JRadioButton oneHumanVersusThreeArtificialIntelligence;
-    private JRadioButton fourHumans;
-    private JRadioButton fourArtificialIntelligence;
-    private JTextField fieldPseudo;
-    private JButton playButton;
+    private final JRadioButton oneHumanVersusThreeArtificialIntelligence;
+    private final JRadioButton fourHumans;
+    private final JRadioButton fourArtificialIntelligence;
+
+    private final JTextField fieldPseudo1;
+    private final JTextField fieldPseudo2;
+    private final JTextField fieldPseudo3;
+    private final JTextField fieldPseudo4;
+
+    private final JButton playButton;
 
 
 
     public MenuGui(){
         super("LUDO GAME");
 
-        this.pseudo = "Player 1";
+        this.pseudos = new String[]{"Player1", "Player2", "Player3", "Player4"};
         this.mode = GameMode.oneHumanVersusTreeArtificialIntelligence;
 
         /* import the icon*/
@@ -34,7 +45,7 @@ public class MenuGui extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         /* set the mainPanel*/
-        JPanel mainPanel = new JPanel(new GridLayout(5,1));
+        JPanel mainPanel = new JPanel(new FlowLayout());
 
         /* Create and add the tile*/
         JLabel title = new JLabel("LUDO GAME", JLabel.CENTER);
@@ -82,10 +93,23 @@ public class MenuGui extends JFrame implements ActionListener{
         JLabel labelPseudo = new JLabel("Pseudo :");
         panelPseudoSelection.add(labelPseudo);
 
-        this.fieldPseudo = new JTextField();
-        fieldPseudo.addActionListener(this);
+        this.fieldPseudo1 = new JTextField("Player1");
+        fieldPseudo1.addActionListener(this);
+        panelPseudoSelection.add(fieldPseudo1);
 
-        panelPseudoSelection.add(fieldPseudo);
+        this.fieldPseudo2 = new JTextField("Player2");
+        fieldPseudo2.addActionListener(this);
+        panelPseudoSelection.add(fieldPseudo2);
+
+        this.fieldPseudo3 = new JTextField("Player3");
+        fieldPseudo3.addActionListener(this);
+        panelPseudoSelection.add(fieldPseudo3);
+
+        this.fieldPseudo4 = new JTextField("Player4");
+        fieldPseudo4.addActionListener(this);
+        panelPseudoSelection.add(fieldPseudo4);
+        
+        
 
         mainPanel.add(panelPseudoSelection);
 
@@ -114,6 +138,16 @@ public class MenuGui extends JFrame implements ActionListener{
         //System.out.println("click on the button : " + e.getActionCommand());
         Object source = e.getSource();
         if (source == this.playButton){
+            this.pseudos[0] = this.fieldPseudo1.getText();
+            this.pseudos[1] = this.fieldPseudo2.getText();
+            this.pseudos[2] = this.fieldPseudo1.getText();
+            this.pseudos[3] = this.fieldPseudo4.getText();
+
+            switch (mode){
+                case oneHumanVersusTreeArtificialIntelligence -> this.gameEngine = new OneHumanVersusThreeAIEngine(this.pseudos);
+                case fourArtificialIntelligence -> this.gameEngine = new FourAIEngine(this.pseudos);
+                case fourHumans -> this.gameEngine = new FourHumansEngine(this.pseudos);
+            }
             this.dispose();
         }
 
@@ -129,19 +163,14 @@ public class MenuGui extends JFrame implements ActionListener{
             this.mode = GameMode.fourArtificialIntelligence;
         }
 
-        if (source == this.fieldPseudo){
-            assert this.fieldPseudo != null;
-            this.pseudo = this.fieldPseudo.getText();
-        }
-
 
 
 
 
     }
 
-    public String getPseudo() {
-        return pseudo;
+    public String[] getPseudos() {
+        return pseudos;
     }
 
     public GameMode getMode() {

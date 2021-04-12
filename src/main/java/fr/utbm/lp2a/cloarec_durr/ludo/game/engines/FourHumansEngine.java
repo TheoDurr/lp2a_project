@@ -1,12 +1,14 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.engines;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.board.Board;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.players.Player;
+import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
 
 public class FourHumansEngine extends Engine{
     public FourHumansEngine(String[] names) {
-        Player[] playerList = new Player[4];
+        this.gameBoard = new Board(GameMode.fourHumans, names);
     }
-    public void startGame(){};
+    public void startGame(){}
 
     @Override
     public String getMessage() {

@@ -13,17 +13,10 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 public class OneHumanVersusThreeAIEngine extends Engine{
     /**
      * Initialize a new Coop VS IA Engine
-     * @param name  The name of the player
+     * @param pseudos  The name of the player
      */
-    public OneHumanVersusThreeAIEngine(String name) {
+    public OneHumanVersusThreeAIEngine(String[] pseudos) {
         super();
-        // Adding the player
-        players[0] = new Human(name, Color.intToColor(1));
-
-        // Adding the 3 IAs
-        for(int i = 1; i < 3; i++){
-            players[i] = new ArtificialIntelligence("Bot "+(i+1), Color.intToColor(i+1));
-        }
     }
 
     public void startGame(){

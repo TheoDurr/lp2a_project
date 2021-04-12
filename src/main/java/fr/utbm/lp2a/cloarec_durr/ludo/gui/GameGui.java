@@ -1,10 +1,7 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.gui;
 
 import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.Engine;
-import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourArtificialIntelligenceEngine;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourHumansEngine;
-import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.OneHumanVersusThreeArtificialIntelligenceEngine;
-import fr.utbm.lp2a.cloarec_durr.ludo.game.items.board.Board;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -13,8 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GameGui extends JFrame implements ActionListener {
-
-    private Engine gameEngine;
 
     private JButton trowDice;
 
@@ -118,11 +113,7 @@ public class GameGui extends JFrame implements ActionListener {
 
 
 
-        switch (gameMode){
-            case oneHumanVersusTreeArtificialIntelligence -> this.gameEngine = new OneHumanVersusThreeArtificialIntelligenceEngine();
-            case fourArtificialIntelligence -> this.gameEngine = new FourArtificialIntelligenceEngine();
-            case fourHumans -> this.gameEngine = new FourHumansEngine(pseudo );
-        }
+
 
 
         /* add the main panel to the window */
@@ -142,7 +133,7 @@ public class GameGui extends JFrame implements ActionListener {
         Object source = e.getSource();
         
         if (source == this.playButton){
-            this.gameEngine.play();
+            //this.gameEngine.play();
             //System.out.println("piece choose" + this.pieceChoose);
             this.updateMessage();
             this.updatePiecePosition();
@@ -170,13 +161,13 @@ public class GameGui extends JFrame implements ActionListener {
         }
 
         if (source == this.trowDice){
-            this.gameEngine.trowDice();
+            //this.gameEngine.trowDice();
         }
         
     }
 
     public void updateMessage(){
-        this.messageBox.setText(this.gameEngine.getMessage());
+        //this.messageBox.setText(this.gameEngine.getMessage());
     }
 
     public void updatePiecePosition(){
