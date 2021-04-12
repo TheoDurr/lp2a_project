@@ -10,7 +10,7 @@ import java.util.Map;
 public abstract class Engine {
     Board gameBoard;
     public abstract String getMessage();
-    public abstract void trowDice();
+    public abstract void throwDice();
     public abstract void play();
 
 

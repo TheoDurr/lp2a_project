@@ -20,7 +20,7 @@ public class FourAIEngine extends Engine{
     }
 
     @Override
-    public void trowDice() {
+    public void throwDice() {
 
     }
 

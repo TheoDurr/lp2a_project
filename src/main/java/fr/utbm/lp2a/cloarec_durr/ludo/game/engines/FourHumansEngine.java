@@ -16,7 +16,7 @@ public class FourHumansEngine extends Engine{
     }
 
     @Override
-    public void trowDice() {
+    public void throwDice() {
 
     }
 
