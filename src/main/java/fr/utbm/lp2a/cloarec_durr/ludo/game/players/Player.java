@@ -3,13 +3,14 @@ package fr.utbm.lp2a.cloarec_durr.ludo.game.players;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Dice;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 
-import java.awt.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Player {
+public abstract class Player {
 
     private final String name;
     private final Color color;
@@ -74,4 +75,7 @@ public class Player {
                 ", pieces=" + Arrays.toString(pieces) +
                 '}';
     }
+
+    public abstract int trowDice();
+    public abstract int choosePiece();
 }

@@ -8,4 +8,18 @@ public class FourHumansEngine extends Engine{
     }
     public void startGame(){};
 
+    @Override
+    public String getMessage() {
+        return null;
+    }
+
+    @Override
+    public void trowDice() {
+
+    }
+
+    @Override
+    public void play() {
+
+    }
 }

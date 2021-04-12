@@ -2,8 +2,8 @@ package fr.utbm.lp2a.cloarec_durr.ludo.game.items;
 
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.Position;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 
-import java.awt.*;
 
 public class Piece {
 
