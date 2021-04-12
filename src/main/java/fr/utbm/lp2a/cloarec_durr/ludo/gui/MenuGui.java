@@ -7,14 +7,14 @@ import java.awt.event.*;
 
 public class MenuGui extends JFrame implements ActionListener{
 
-    String pseudo;
-    GameMode mode;
+    private String pseudo;
+    private GameMode mode;
 
-    JRadioButton oneHumanVersusThreeArtificialIntelligence;
-    JRadioButton fourHumans;
-    JRadioButton fourArtificialIntelligence;
-    JTextField fieldPseudo;
-    JButton playButton;
+    private JRadioButton oneHumanVersusThreeArtificialIntelligence;
+    private JRadioButton fourHumans;
+    private JRadioButton fourArtificialIntelligence;
+    private JTextField fieldPseudo;
+    private JButton playButton;
 
 
 

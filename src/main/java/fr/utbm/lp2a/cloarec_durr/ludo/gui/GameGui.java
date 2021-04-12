@@ -14,20 +14,20 @@ import java.awt.event.ActionListener;
 
 public class GameGui extends JFrame implements ActionListener {
 
-    Engine gameEngine;
+    private Engine gameEngine;
 
-    JButton trowDice;
+    private JButton trowDice;
 
-    JRadioButton piece1;
-    JRadioButton piece2;
-    JRadioButton piece3;
-    JRadioButton piece4;
-    JRadioButton pass;
-    int pieceChoose;
+    private JRadioButton piece1;
+    private JRadioButton piece2;
+    private JRadioButton piece3;
+    private JRadioButton piece4;
+    private JRadioButton pass;
+    private int pieceChoose;
 
-    JButton playButton;
+    private JButton playButton;
 
-    JLabel messageBox;
+    private JLabel messageBox;
 
 
 

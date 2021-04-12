@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="229.0" y="155.0">fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionTest</node>
+    <node x="575.0" y="155.0">fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.Position</node>
+    <node x="0.0" y="80.0">fr.utbm.lp2a.cloarec_durr.ludo.game.engines.OneHumanVersusThreeArtificialIntelligenceEngine</node>
+    <node x="444.0" y="80.0">fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourHumansEngine</node>
+    <node x="149.0" y="230.0">fr.utbm.lp2a.cloarec_durr.ludo.game.players.Player</node>
+    <node x="556.0" y="230.0">fr.utbm.lp2a.cloarec_durr.ludo.game.items.Dice</node>
+    <node x="681.0" y="230.0">fr.utbm.lp2a.cloarec_durr.ludo.Main</node>
+    <node x="290.0" y="230.0">fr.utbm.lp2a.cloarec_durr.ludo.game.items.board.Board</node>
+    <node x="0.0" y="155.0">fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants</node>
+    <node x="732.0" y="155.0">fr.utbm.lp2a.cloarec_durr.ludo.gui.GameGui</node>
+    <node x="0.0" y="230.0">fr.utbm.lp2a.cloarec_durr.ludo.gui.MenuGui</node>
+    <node x="423.0" y="230.0">fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece</node>
+    <node x="640.0" y="80.0">fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourArtificialIntelligenceEngine</node>
+    <node x="484.0" y="0.0">fr.utbm.lp2a.cloarec_durr.ludo.game.engines.Engine</node>
+    <node x="418.0" y="155.0">fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourHumansEngine" target="fr.utbm.lp2a.cloarec_durr.ludo.game.engines.Engine">
+      <point x="0.0" y="-15.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="fr.utbm.lp2a.cloarec_durr.ludo.game.engines.OneHumanVersusThreeArtificialIntelligenceEngine" target="fr.utbm.lp2a.cloarec_durr.ludo.game.engines.Engine">
+      <point x="0.0" y="-15.0" />
+      <point x="212.0" y="55.0" />
+      <point x="500.0" y="55.0" />
+      <point x="-32.0" y="15.0" />
+    </edge>
+    <edge source="fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourArtificialIntelligenceEngine" target="fr.utbm.lp2a.cloarec_durr.ludo.game.engines.Engine">
+      <point x="0.0" y="-15.0" />
+      <point x="792.0" y="55.0" />
+      <point x="564.0" y="55.0" />
+      <point x="32.0" y="15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="910.5" y="124.5" />
+  <SelectedNodes>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionTest</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.Position</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.engines.OneHumanVersusThreeArtificialIntelligenceEngine</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourHumansEngine</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.players.Player</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.items.Dice</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.Main</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.items.board.Board</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.gui.GameGui</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.gui.MenuGui</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourArtificialIntelligenceEngine</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.game.engines.Engine</node>
+    <node>fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
