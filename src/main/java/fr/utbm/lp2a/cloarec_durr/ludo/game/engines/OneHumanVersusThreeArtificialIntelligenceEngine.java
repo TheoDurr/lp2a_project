@@ -15,4 +15,9 @@ public class OneHumanVersusThreeArtificialIntelligenceEngine extends Engine{
     public void play() {
 
     }
+
+    @Override
+    void startGame() {
+
+    }
 }

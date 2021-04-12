@@ -1,5 +1,6 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.engines;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.board.Board;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.players.Player;
 
 import java.awt.*;

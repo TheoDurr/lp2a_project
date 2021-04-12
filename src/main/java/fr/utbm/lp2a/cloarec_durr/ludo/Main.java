@@ -12,7 +12,8 @@ public class Main {
 
 
         //GameMode gameMode = GameMode.oneHumanVersusTreeArtificialIntelligence;
-        GameGui gameGui = new GameGui(gameMode);
+        String[] pseudos = new String[]{"Player1", "Player2", "Player3", "Player4"};
+        GameGui gameGui = new GameGui(gameMode, pseudos);
 
     }
 }

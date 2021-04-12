@@ -31,7 +31,7 @@ public class GameGui extends JFrame implements ActionListener {
 
 
 
-    public GameGui(GameMode gameMode) throws HeadlessException {
+    public GameGui(GameMode gameMode, String[] pseudo) throws HeadlessException {
 
         super("LUDO GAME - " + gameMode.toString());
 
@@ -121,7 +121,7 @@ public class GameGui extends JFrame implements ActionListener {
         switch (gameMode){
             case oneHumanVersusTreeArtificialIntelligence -> this.gameEngine = new OneHumanVersusThreeArtificialIntelligenceEngine();
             case fourArtificialIntelligence -> this.gameEngine = new FourArtificialIntelligenceEngine();
-            case fourHumans -> this.gameEngine = new FourHumansEngine();
+            case fourHumans -> this.gameEngine = new FourHumansEngine(pseudo );
         }
 
 
