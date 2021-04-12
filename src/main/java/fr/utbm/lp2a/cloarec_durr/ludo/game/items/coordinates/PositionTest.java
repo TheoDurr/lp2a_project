@@ -55,6 +55,5 @@ class PositionTest {
         assertEquals(34, pos.convertPositionColor(Color.GREEN).getProgress());
         assertEquals(47, pos.convertPositionColor(Color.RED).getProgress());
 
-
     }
 }

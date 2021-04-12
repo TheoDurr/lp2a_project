@@ -12,7 +12,5 @@ public class Dice extends Random {
         super(seed);
     }
 
-    int Throw(){
-        return this.nextInt() % 6;
-    }
+    public int Throw(){return this.nextInt() % 6;}
 }

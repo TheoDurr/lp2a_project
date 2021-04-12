@@ -65,8 +65,4 @@ public class Piece {
         return this.isAtStar() || this.isAtColoredSquare();
     }
 
-
-
-
-
 }

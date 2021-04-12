@@ -6,6 +6,7 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Player {
@@ -48,6 +49,10 @@ public class Player {
         return i;
     }
 
+    public int throwDice(){
+        return this.dice.Throw();
+    }
+
     public List<Piece> getMovablePieces(int diceValue){
         List<Piece> movablePieces = new ArrayList<>();
 
@@ -59,5 +64,14 @@ public class Player {
             }
         }
         return movablePieces;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", color=" + color +
+                ", pieces=" + Arrays.toString(pieces) +
+                '}';
     }
 }
