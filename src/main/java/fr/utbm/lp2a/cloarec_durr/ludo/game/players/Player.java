@@ -22,7 +22,7 @@ public abstract class Player {
         this.color = color;
         this.pieces = new Piece[4];
         for (int i = 0; i < this.pieces.length; i++) {
-            pieces[i] = new Piece(color);
+            pieces[i] = new Piece(color, i);
         }
         this.dice = new Dice();
     }
