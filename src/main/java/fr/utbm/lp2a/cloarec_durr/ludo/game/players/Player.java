@@ -14,14 +14,14 @@ public abstract class Player {
 
     private final String name;
     private final Color color;
-    private Piece[] pieces;
     private final Dice dice;
+    private Piece[] pieces;
 
     public Player(String name, Color color) {
         this.name = name;
         this.color = color;
         this.pieces = new Piece[4];
-        for (int i = 0; i < this.pieces.length; i ++){
+        for (int i = 0; i < this.pieces.length; i++) {
             pieces[i] = new Piece(color);
         }
         this.dice = new Dice();
@@ -39,28 +39,28 @@ public abstract class Player {
         return pieces;
     }
 
-    public int getNumberOfPieceAtHome(){
+    public int getNumberOfPieceAtHome() {
         int i = 0;
         for (Piece piece :
                 this.pieces) {
-            if (piece.isAtHome()){
-                i ++;
+            if (piece.isAtHome()) {
+                i++;
             }
         }
         return i;
     }
 
-    public int throwDice(){
+    public int throwDice() {
         return this.dice.Throw();
     }
 
-    public List<Piece> getMovablePieces(int diceValue){
+    public List<Piece> getMovablePieces(int diceValue) {
         List<Piece> movablePieces = new ArrayList<>();
 
         for (Piece piece :
                 this.pieces) {
             int pieceProgress = piece.getPosition().getProgress();
-            if ((pieceProgress == PositionConstants.STABLE && diceValue == 6) || (pieceProgress >= PositionConstants.START && pieceProgress + diceValue <= PositionConstants.HOME )){
+            if ((pieceProgress == PositionConstants.STABLE && diceValue == 6) || (pieceProgress >= PositionConstants.START && pieceProgress + diceValue <= PositionConstants.HOME)) {
                 movablePieces.add(piece);
             }
         }
@@ -76,6 +76,5 @@ public abstract class Player {
                 '}';
     }
 
-    public abstract int trowDice();
     public abstract int choosePiece();
 }

@@ -4,6 +4,8 @@ import java.util.Random;
 
 public class Dice extends Random {
 
+    private int value;
+
     public Dice() {
         super();
     }
@@ -12,5 +14,18 @@ public class Dice extends Random {
         super(seed);
     }
 
-    public int Throw(){return this.nextInt() % 6;}
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int Throw() {
+        this.setValue(this.nextInt() % 6);
+        return this.getValue();
+    }
+
+    //TODO toString for the value
 }

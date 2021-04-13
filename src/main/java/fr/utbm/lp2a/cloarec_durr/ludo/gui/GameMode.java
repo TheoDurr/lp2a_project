@@ -7,8 +7,8 @@ public enum GameMode {
     public String toString() {
         switch (this){
             case fourHumans -> {return "Four Humans";}
-            case oneHumanVersusTreeArtificialIntelligence -> {return "One Human Versus TreeArtificialIntelligence";}
-            case fourArtificialIntelligence -> {return "Four Artificial Intelligence";}
+            case oneHumanVersusTreeArtificialIntelligence -> {return "One Human Versus Tree Artificial Intelligences";}
+            case fourArtificialIntelligence -> {return "Four Artificial Intelligences";}
         }
         return "";
     }
