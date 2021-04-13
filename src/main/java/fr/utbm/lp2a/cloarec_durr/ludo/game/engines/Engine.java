@@ -1,5 +1,6 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.engines;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.board.Board;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.players.Player;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameGui;
@@ -34,12 +35,12 @@ public abstract class Engine {
      */
     private void playTurn() {
         for (Player player : gameBoard.getPlayers()) {
-            int value = player.throwDice();
-            player.choosePiece();
+            int value = 6; int i = 0;
             // Check if the player has a six and has played less than three times
-            int i = 0;
             while (value == 6 && i < 3) {
                 value = player.throwDice();
+                Piece pieceToMove = player.choosePiece();
+                player.movePiece(pieceToMove);
                 i++;
             }
         }

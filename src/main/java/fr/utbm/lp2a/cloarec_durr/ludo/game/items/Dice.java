@@ -27,5 +27,8 @@ public class Dice extends Random {
         return this.getValue();
     }
 
-    //TODO toString for the value
+    @Override
+    public String toString() {
+        return "" + getValue();
+    }
 }

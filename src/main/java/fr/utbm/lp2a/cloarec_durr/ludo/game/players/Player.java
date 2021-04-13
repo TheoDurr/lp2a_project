@@ -15,7 +15,7 @@ public abstract class Player {
     private final String name;
     private final Color color;
     private final Dice dice;
-    private Piece[] pieces;
+    private final Piece[] pieces;
 
     public Player(String name, Color color) {
         this.name = name;
@@ -26,6 +26,10 @@ public abstract class Player {
         }
         this.dice = new Dice();
     }
+
+    //
+    //********* GETTER & SETTERS *********
+    //
 
     public String getName() {
         return name;
@@ -39,10 +43,37 @@ public abstract class Player {
         return pieces;
     }
 
+    /**
+     * Get the piece index
+     *
+     * @param p the piece the index to get
+     * @return int : the index of the piece (-1 if not found)
+     */
+    public int getPieceIndex(Piece p) {
+        for (int i = 0; i < pieces.length; i++) {
+            if (pieces[i] == p) {
+                return i;
+            }
+        }
+        // No piece Found
+        // Should never happen
+        return -1;
+    }
+
+    //
+    //********* METHODS *********
+    //
+    public abstract Piece choosePiece();
+
+    /**
+     * Get the number of pieces at home
+     *
+     * @return int : the number of pieces at home
+     */
     public int getNumberOfPieceAtHome() {
         int i = 0;
         for (Piece piece :
-                this.pieces) {
+                this.getPieces()) {
             if (piece.isAtHome()) {
                 i++;
             }
@@ -50,31 +81,53 @@ public abstract class Player {
         return i;
     }
 
-    public int throwDice() {
-        return this.dice.Throw();
-    }
-
-    public List<Piece> getMovablePieces(int diceValue) {
+    /**
+     * Get the list of the movable pieces
+     *
+     * @return the list of the movable pieces
+     */
+    public List<Piece> getMovablePieces() {
         List<Piece> movablePieces = new ArrayList<>();
 
         for (Piece piece :
-                this.pieces) {
+                this.getPieces()) {
             int pieceProgress = piece.getPosition().getProgress();
-            if ((pieceProgress == PositionConstants.STABLE && diceValue == 6) || (pieceProgress >= PositionConstants.START && pieceProgress + diceValue <= PositionConstants.HOME)) {
+            if ((pieceProgress == PositionConstants.STABLE && dice.getValue() == 6) || (pieceProgress >= PositionConstants.START && pieceProgress + dice.getValue() <= PositionConstants.HOME)) {
                 movablePieces.add(piece);
             }
         }
         return movablePieces;
     }
 
-    @Override
-    public String toString() {
-        return "Player{" +
-                "name='" + name + '\'' +
-                ", color=" + color +
-                ", pieces=" + Arrays.toString(pieces) +
-                '}';
+    /**
+     * Ask the user the piece to move and moves it of N squares
+     *
+     * @param pieceToMove The piece to move
+     */
+    public void movePiece(Piece pieceToMove) {
+        int pieceIndex = getPieceIndex(pieceToMove);
+        if (pieceIndex != -1) {
+            pieces[pieceIndex].moveForward(dice.getValue());
+        } else {
+            System.out.println("ERROR : Piece not found");
+        }
     }
 
-    public abstract int choosePiece();
+    /**
+     * Throws the player's dice
+     *
+     * @return the dice value
+     */
+    public int throwDice() {
+        return this.dice.Throw();
+    }
+
+    @Override
+    public String toString() {
+        return "DEBUG : Player{" +
+                "name='" + getName() + '\'' +
+                ", color=" + getColor() +
+                ", pieces=" + Arrays.toString(getPieces()) +
+                '}';
+    }
 }

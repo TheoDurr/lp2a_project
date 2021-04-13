@@ -1,5 +1,6 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.players;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 
 public class ArtificialIntelligence extends Player{
@@ -9,12 +10,12 @@ public class ArtificialIntelligence extends Player{
     }
 
     @Override
-    public int trowDice() {
+    public int throwDice() {
         return 0;
     }
 
     @Override
-    public int choosePiece() {
-        return 0;
+    public Piece choosePiece() {
+        return new Piece(getColor());
     }
 }
