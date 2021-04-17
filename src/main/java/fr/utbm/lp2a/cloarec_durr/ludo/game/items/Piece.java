@@ -9,15 +9,17 @@ public class Piece {
 
     private Position position;
     private Color color;
+    private int number;
 
     public Piece(Position position, Color color) {
         this.position = position;
         this.color = color;
     }
 
-    public Piece(Color color){
+    public Piece(Color color, int number){
         this.position = new Position(PositionConstants.STABLE, color);
         this.color = color;
+        this.number = number;
     }
 
     public Position getPosition() {
@@ -34,6 +36,14 @@ public class Piece {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public boolean isAtStable(){

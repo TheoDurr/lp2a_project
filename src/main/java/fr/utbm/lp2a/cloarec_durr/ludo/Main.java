@@ -13,6 +13,7 @@ public class Main {
         //String[] pseudos = menuGui.getPseudos();
 
         LudoParty party = new LudoParty();
+        party.start();
 
         /*GameMode gameMode = GameMode.oneHumanVersusTreeArtificialIntelligence;
         String[] pseudos = new String[]{"Player1", "Player2", "Player3", "Player4"};

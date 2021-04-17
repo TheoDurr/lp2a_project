@@ -16,6 +16,17 @@ public class ArtificialIntelligence extends Player{
 
     @Override
     public Piece choosePiece() {
-        return new Piece(getColor());
+        int choice = this.iaChoosePiece();
+        if (choice <= 0 || choice < 4){
+            return null;
+        }
+        else {
+            return this.getPieces()[choice - 1];
+        }
+
+    }
+
+    public int iaChoosePiece(){
+        return 0;
     }
 }

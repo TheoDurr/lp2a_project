@@ -1,31 +1,19 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.gui;
 
-import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.Engine;
-import fr.utbm.lp2a.cloarec_durr.ludo.game.engines.FourHumansEngine;
+
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class GameGui extends JFrame implements ActionListener {
-
-    private JButton trowDice;
-
-    private JRadioButton piece1;
-    private JRadioButton piece2;
-    private JRadioButton piece3;
-    private JRadioButton piece4;
-    private JRadioButton pass;
-    private int pieceChoose;
-
-    private JButton playButton;
+public class GameGui extends JFrame{
 
     private JLabel messageBox;
 
     private JLabel[] piecesImage;
+    private JRadioButton piece1;
 
 
     public GameGui(GameMode gameMode, String[] pseudo) throws HeadlessException {
@@ -66,19 +54,6 @@ public class GameGui extends JFrame implements ActionListener {
 
         /* Create the game board panel */
         mainPanel.add(buildGameBoard());
-
-        /* Create the trow dice button */
-        this.trowDice = new JButton("Trow dice !");
-        this.trowDice.addActionListener(this);
-        mainPanel.add(trowDice);
-
-        /* Create the panel for choosing the moving piece */
-        mainPanel.add(buildChoosePiece());
-
-        /* create the play button */
-        this.playButton = new JButton("PLAY !");
-        playButton.addActionListener(this);
-        mainPanel.add(playButton);
 
         /* create the message box */
         this.messageBox = new JLabel("Let the game start");
@@ -192,6 +167,9 @@ public class GameGui extends JFrame implements ActionListener {
 
     public void printPiecePosition(Piece[] pieces) {
 
+    }
+
+    public void updatePiecePosition(Piece[] pieces){
 
     }
 
