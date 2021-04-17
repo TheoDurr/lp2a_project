@@ -28,7 +28,6 @@ public class GameGui extends JFrame implements ActionListener {
     private JLabel[] piecesImage;
 
 
-
     public GameGui(GameMode gameMode, String[] pseudo) throws HeadlessException {
 
         super("LUDO GAME - " + gameMode.toString());
@@ -36,7 +35,7 @@ public class GameGui extends JFrame implements ActionListener {
         build();
     }
 
-    private void build(){
+    private void build() {
         /* import the icon*/
         ImageIcon icon = new ImageIcon("src/main/resources/ludo_game_board.png");
         this.setIconImage(icon.getImage());
@@ -53,7 +52,7 @@ public class GameGui extends JFrame implements ActionListener {
         this.setVisible(true);
     }
 
-    private JPanel buildContentPane(){
+    private JPanel buildContentPane() {
         /* set the mainPanel*/
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new FlowLayout());
@@ -90,8 +89,8 @@ public class GameGui extends JFrame implements ActionListener {
         return mainPanel;
     }
 
-    private JPanel buildGameBoard(){
-        JPanel gameBoardPanel = new JPanel(new GridLayout(1,1));
+    private JPanel buildGameBoard() {
+        JPanel gameBoardPanel = new JPanel(new GridLayout(1, 1));
 
         /* Create and add the image of the game board */
         JLabel gameBoardImage = new JLabel(new ImageIcon("src/main/resources/ludo_game_board.png"));
@@ -110,7 +109,7 @@ public class GameGui extends JFrame implements ActionListener {
         return gameBoardPanel;
     }
 
-    private JPanel buildChoosePiece(){
+    private JPanel buildChoosePiece() {
         /* Create the panel for choosing the moving piece */
         JPanel panelMovePiece = new JPanel(new GridLayout(1, 5));
         Border border = BorderFactory.createTitledBorder("Choose the piece that you want move :");
@@ -152,48 +151,50 @@ public class GameGui extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //System.out.println("click on the button : " + e.getActionCommand());
         Object source = e.getSource();
-        
-        if (source == this.playButton){
+
+        if (source == this.playButton) {
             //this.gameEngine.play();
             //System.out.println("piece choose" + this.pieceChoose);
             //this.updateMessage();
             //this.updatePiecePosition();
 
         }
-        
-        if (source == this.piece1){
+
+        if (source == this.piece1) {
             this.pieceChoose = 1;
         }
 
-        if (source == this.piece2){
+        if (source == this.piece2) {
             this.pieceChoose = 2;
         }
 
-        if (source == this.piece3){
+        if (source == this.piece3) {
             this.pieceChoose = 3;
         }
 
-        if (source == this.piece4){
+        if (source == this.piece4) {
             this.pieceChoose = 4;
         }
 
-        if (source == this.pass){
+        if (source == this.pass) {
             this.pieceChoose = 0;
         }
 
-        if (source == this.trowDice){
+        if (source == this.trowDice) {
             //this.gameEngine.trowDice();
         }
-        
+
     }
 
-    public void updateMessage(){
+    public void updateMessage() {
         //this.messageBox.setText(this.gameEngine.getMessage());
     }
 
-    public void printPiecePosition(Piece[] pieces){
+    public void printPiecePosition(Piece[] pieces) {
 
-        
 
+    }
+
+    public void updatePositions() {
     }
 }

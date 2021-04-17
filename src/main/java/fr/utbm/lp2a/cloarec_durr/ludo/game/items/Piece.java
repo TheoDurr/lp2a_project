@@ -61,7 +61,7 @@ public class Piece {
         this.setPosition(this.getPosition().getStablePosition());
     }
 
-    public boolean isImmune(){
+    public boolean isAtImmuneSquare(){
         return this.isAtStar() || this.isAtColoredSquare();
     }
 

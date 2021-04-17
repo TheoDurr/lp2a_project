@@ -1,10 +1,15 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.items.board;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.Position;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.players.ArtificialIntelligence;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.players.Human;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.players.Player;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Board {
     private Player[] players;
@@ -35,7 +40,27 @@ public class Board {
         return players;
     }
 
+    public List<Piece> getPiecesAtCoordinates(Position position){
+        List<Piece> result = new ArrayList<>();
+        for (Player player : getPlayers()) {
+            for (Piece piece : player.getPieces()) {
+                if (piece.getPosition().equals(position)) {
+                    result.add(piece);
+                }
+            }
+        }
+        if (result.isEmpty()) {
+            return null;
+        } else {
+            return result;
+        }
+    }
+
     public Player newPlayer(int playingPlayer) {
         return this.players[(playingPlayer + 1) % 4];
+    }
+
+    public void update() {
+
     }
 }
