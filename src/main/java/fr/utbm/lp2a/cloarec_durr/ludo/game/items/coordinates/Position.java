@@ -75,5 +75,9 @@ public class Position {
 
     }
 
+    public boolean equals(Position compareTo){
+        return compareTo.convertPositionColor(this.getPlayerColor()).getProgress() == this.getProgress();
+    }
+
 
 }

@@ -15,7 +15,10 @@ public class Human extends Player{
 
     @Override
     public int throwDice() {
-        return 0;
+        JOptionPane.showMessageDialog(null, "Click on the button to trow the dice");
+        int value = this.getDice().Throw();
+        JOptionPane.showMessageDialog(null, "You get a " + value);
+        return value;
     }
 
     @Override
@@ -29,7 +32,7 @@ public class Human extends Player{
         }
     }
 
-    public int humanChoosePiece(){
+    private int humanChoosePiece(){
         List<Piece> movablePiece = this.getMovablePieces();
         String[] stringMovablePiece = new String[movablePiece.size()+1];
         stringMovablePiece[0] = "pass";

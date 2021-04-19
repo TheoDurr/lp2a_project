@@ -11,7 +11,7 @@ public class ArtificialIntelligence extends Player{
 
     @Override
     public int throwDice() {
-        return 0;
+        return this.getDice().Throw();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ArtificialIntelligence extends Player{
 
     }
 
-    public int iaChoosePiece(){
+    private int iaChoosePiece(){
         return 0;
     }
 }

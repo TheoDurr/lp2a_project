@@ -60,6 +60,10 @@ public abstract class Player {
         return -1;
     }
 
+    public Dice getDice() {
+        return dice;
+    }
+
     //
     //********* METHODS *********
     //

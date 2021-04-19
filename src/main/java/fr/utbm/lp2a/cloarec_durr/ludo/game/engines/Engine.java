@@ -45,7 +45,9 @@ public abstract class Engine {
             while (value == 6 && i < 3) {
                 value = player.throwDice();
                 Piece pieceToMove = player.choosePiece();
-                movePiece(pieceToMove, value);
+                if (pieceToMove != null){
+                    movePiece(pieceToMove, value);
+                }
                 gui.updatePositions();
                 i++;
             }
@@ -77,6 +79,7 @@ public abstract class Engine {
     }
 
     public int start() {
+        playTurn();
         return 0;
     }
 }
