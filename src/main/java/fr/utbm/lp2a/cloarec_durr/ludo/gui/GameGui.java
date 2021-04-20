@@ -4,9 +4,7 @@ package fr.utbm.lp2a.cloarec_durr.ludo.gui;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 
 public class GameGui extends JFrame{
 
@@ -29,7 +27,7 @@ public class GameGui extends JFrame{
         this.setIconImage(icon.getImage());
 
         /* set the property of the windows */
-        this.setSize(550, 700);
+        this.setSize(640, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
@@ -53,13 +51,8 @@ public class GameGui extends JFrame{
         mainPanel.add(title);
 
         /* Create the game board panel */
-        mainPanel.add(buildGameBoard());
-
-        /* create the message box */
-        this.messageBox = new JLabel("Let the game start");
-        Border border = BorderFactory.createTitledBorder("Message");
-        messageBox.setBorder(border);
-        mainPanel.add(messageBox);
+        /*mainPanel.add(buildGameBoard());*/
+        mainPanel.add(new GameBoardGui());
 
         return mainPanel;
     }
@@ -68,10 +61,14 @@ public class GameGui extends JFrame{
         JPanel gameBoardPanel = new JPanel(new GridLayout(1, 1));
 
         /* Create and add the image of the game board */
-        JLabel gameBoardImage = new JLabel(new ImageIcon("src/main/resources/ludo_game_board.png"));
-        gameBoardPanel.add(gameBoardImage);
+        ImageIcon gameBordImage = new ImageIcon("src/main/resources/ludo_game_board.png");
+        JLabel gameBoardLabel = new JLabel(gameBordImage);
+        gameBoardPanel.add(gameBoardLabel);
 
         /* Create the piece and add them to the board */
+
+
+
         /*this.piecesImage = new JLabel[16];
         ImageIcon[] images = new ImageIcon[16];
         for (int i = 0; i < 2; i++){
@@ -84,10 +81,6 @@ public class GameGui extends JFrame{
         return gameBoardPanel;
     }
 
-
-    public void updateMessage() {
-        //this.messageBox.setText(this.gameEngine.getMessage());
-    }
 
     public void printPiecePosition(Piece[] pieces) {
 
