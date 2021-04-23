@@ -54,12 +54,18 @@ public abstract class Engine {
         }
     }
 
+    /**
+     * Move a piece
+     * @param pieceToMove The piece to move
+     * @param progress The number of squares to move
+     */
     private void movePiece(Piece pieceToMove, int progress) {
         // Check conflicts
         List<Piece> potentialConflicts = gameBoard.getPiecesAtCoordinates(new Position(pieceToMove.getPosition().getProgress() + progress, pieceToMove.getColor()));
         if (potentialConflicts != null) {
             boolean pieceWithSameColor = false;
             for (Piece piece : potentialConflicts) {
+                // FIXME : OVERRIDE EQUALS FUNCTION
                 if (piece.getColor().equals(pieceToMove.getColor())) {
                     pieceWithSameColor = true;
                 }
