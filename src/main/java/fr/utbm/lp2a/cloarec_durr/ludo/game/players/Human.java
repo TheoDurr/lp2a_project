@@ -15,9 +15,9 @@ public class Human extends Player{
 
     @Override
     public int throwDice() {
-        JOptionPane.showMessageDialog(null, "Click on the button to trow the dice");
+        JOptionPane.showMessageDialog(null, this.getName() + " : Click on the button to trow the dice");
         int value = this.getDice().Throw();
-        JOptionPane.showMessageDialog(null, "You get a " + value);
+        JOptionPane.showMessageDialog(null,  this.getName() + " : You get a " + value);
         return value;
     }
 
@@ -40,7 +40,7 @@ public class Human extends Player{
             stringMovablePiece[i+1] = "" + movablePiece.get(i).getNumber();
 
         }
-        String result =  (String)JOptionPane.showInputDialog(null, "Choose the piece that you want move", "Piece", JOptionPane.QUESTION_MESSAGE, null, stringMovablePiece, stringMovablePiece[0]);
+        String result =  (String)JOptionPane.showInputDialog(null, this.getName() + " : Choose the piece that you want move " + this.getDice().getValue() + " cases forward" , this.getName() + " : Choose Piece", JOptionPane.QUESTION_MESSAGE, null, stringMovablePiece, stringMovablePiece[0]);
         int intResult = 0;
         try {
             intResult = Integer.parseInt(result);

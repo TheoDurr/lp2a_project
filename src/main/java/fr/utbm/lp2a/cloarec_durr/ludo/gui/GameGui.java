@@ -8,16 +8,17 @@ import java.awt.*;
 
 public class GameGui extends JFrame{
 
-    private JLabel messageBox;
+    private GameBoardGui gameBoardGui;
+    private JPanel mainPanel;
+    private Piece[] pieces;
+    private String[] pseudos;
 
-    private JLabel[] piecesImage;
-    private JRadioButton piece1;
 
-
-    public GameGui(GameMode gameMode, String[] pseudo) throws HeadlessException {
+    public GameGui(GameMode gameMode, String[] pseudo, Piece[] pieces) throws HeadlessException {
 
         super("LUDO GAME - " + gameMode.toString());
-
+        this.pieces = pieces;
+        this.pseudos = pseudo;
         build();
     }
 
@@ -32,7 +33,8 @@ public class GameGui extends JFrame{
 
 
         /* add the main panel to the window */
-        this.setContentPane(buildContentPane());
+        this.mainPanel = buildContentPane();
+        this.setContentPane(this.mainPanel);
 
         /* set the visibility of the window*/
         this.setVisible(true);
@@ -51,45 +53,15 @@ public class GameGui extends JFrame{
         mainPanel.add(title);
 
         /* Create the game board panel */
-        /*mainPanel.add(buildGameBoard());*/
-        mainPanel.add(new GameBoardGui());
+        this.gameBoardGui = new GameBoardGui(this.pieces, this.pseudos);
+        mainPanel.add(this.gameBoardGui);
 
         return mainPanel;
     }
 
-    private JPanel buildGameBoard() {
-        JPanel gameBoardPanel = new JPanel(new GridLayout(1, 1));
-
-        /* Create and add the image of the game board */
-        ImageIcon gameBordImage = new ImageIcon("src/main/resources/ludo_game_board.png");
-        JLabel gameBoardLabel = new JLabel(gameBordImage);
-        gameBoardPanel.add(gameBoardLabel);
-
-        /* Create the piece and add them to the board */
-
-
-
-        /*this.piecesImage = new JLabel[16];
-        ImageIcon[] images = new ImageIcon[16];
-        for (int i = 0; i < 2; i++){
-            images[i] = new ImageIcon(("src/main/resources/piece/piece" + fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color.intToColor((i/4)+1)) + (i%4) + ".png");
-            this.piecesImage[i] = new JLabel(images[i]);
-            gameBoardPanel.add(this.piecesImage[i]);
-
-        }*/
-
-        return gameBoardPanel;
-    }
-
-
-    public void printPiecePosition(Piece[] pieces) {
-
-    }
-
-    public void updatePiecePosition(Piece[] pieces){
-
-    }
 
     public void updatePositions() {
+        this.gameBoardGui.updatePieces();
+
     }
 }

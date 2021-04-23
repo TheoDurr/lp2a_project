@@ -7,16 +7,23 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.players.Player;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameGui;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
 
+import javax.swing.*;
 import java.util.List;
 
 public abstract class Engine {
     protected Board gameBoard;
-    private GameGui gui;
+    protected GameGui gui;
 
     public Engine(GameMode gameMode, String[] pseudo) {
         // TODO REMOVE NULL AT NEXT COMMIT
-        this.gui = new GameGui(gameMode, pseudo);
+
         this.gameBoard = new Board(gameMode, pseudo);
+        Piece[] pieces = new Piece[16];
+        for (int i = 0; i < 16; i++) {
+            pieces[i] = this.gameBoard.getPlayers()[i/4].getPieces()[i%4];
+        }
+
+        this.gui = new GameGui(gameMode, pseudo, pieces);
     }
 
     /**
@@ -37,7 +44,7 @@ public abstract class Engine {
     /**
      * Play the next turn
      */
-    private void playTurn() {
+    protected void playTurn() {
         for (Player player : gameBoard.getPlayers()) {
             int value = 6;
             int i = 0;
@@ -52,9 +59,10 @@ public abstract class Engine {
                 i++;
             }
         }
+        this.gui.updatePositions();
     }
 
-    private void movePiece(Piece pieceToMove, int progress) {
+    protected void movePiece(Piece pieceToMove, int progress) {
         // Check conflicts
         List<Piece> potentialConflicts = gameBoard.getPiecesAtCoordinates(new Position(pieceToMove.getPosition().getProgress() + progress, pieceToMove.getColor()));
         if (potentialConflicts != null) {
@@ -79,7 +87,7 @@ public abstract class Engine {
     }
 
     public int start() {
-        playTurn();
+
         return 0;
     }
 }
