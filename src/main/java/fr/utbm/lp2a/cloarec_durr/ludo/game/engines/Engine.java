@@ -7,23 +7,16 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.players.Player;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameGui;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
 
-import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public abstract class Engine {
     protected Board gameBoard;
-    protected GameGui gui;
+
 
     public Engine(GameMode gameMode, String[] pseudo) {
-        // TODO REMOVE NULL AT NEXT COMMIT
-
         this.gameBoard = new Board(gameMode, pseudo);
-        Piece[] pieces = new Piece[16];
-        for (int i = 0; i < 16; i++) {
-            pieces[i] = this.gameBoard.getPlayers()[i/4].getPieces()[i%4];
-        }
-
-        this.gui = new GameGui(gameMode, pseudo, pieces);
     }
 
     /**
@@ -40,26 +33,23 @@ public abstract class Engine {
         return null;
     }
 
-    //@ TODO: 13/04/2021 add the case when the player pass
     /**
-     * Play the next turn
+     * Play the turn of one player
      */
-    protected void playTurn() {
-        for (Player player : gameBoard.getPlayers()) {
+    protected void playTurn(Player playingPlayer) {
             int value = 6;
             int i = 0;
             // Check if the player has a six and has played less than three times
             while (value == 6 && i < 3) {
-                value = player.throwDice();
-                Piece pieceToMove = player.choosePiece();
+                value = playingPlayer.throwDice();
+                Piece pieceToMove = playingPlayer.choosePiece();
                 if (pieceToMove != null){
                     movePiece(pieceToMove, value);
                 }
-                gui.updatePositions();
+                updateBoard();
                 i++;
             }
-        }
-        this.gui.updatePositions();
+            updateBoard();
     }
 
     /**
@@ -67,9 +57,23 @@ public abstract class Engine {
      * @param pieceToMove The piece to move
      * @param progress The number of squares to move
      */
-    private void movePiece(Piece pieceToMove, int progress) {
+    protected void movePiece(Piece pieceToMove, int progress) {
+        // Check if we can move the piece
+        // @TODO understand why the pieces don't move when we want and implement processConflict !! Good night my self
+        if (pieceToMove.isLegalMove(progress)){
+            //process all the conflict, it mean that the other piece could go back to stable
+            //processConflict(pieceToMove, progress);
+            //then move really the piece
+            pieceToMove.moveForward(progress);
+        }
+
+
+    }
+
+    protected void processConflict(Piece pieceToMove, int progress){
+        Position futurePosition = new Position(pieceToMove.getPosition().getProgress() + progress, pieceToMove.getColor());
         // Check conflicts
-        List<Piece> potentialConflicts = gameBoard.getPiecesAtCoordinates(new Position(pieceToMove.getPosition().getProgress() + progress, pieceToMove.getColor()));
+        List<Piece> potentialConflicts = gameBoard.getPiecesAtCoordinates(futurePosition);
         if (potentialConflicts != null) {
             boolean pieceWithSameColor = false;
             for (Piece piece : potentialConflicts) {
@@ -86,14 +90,48 @@ public abstract class Engine {
             pieceToMove.moveForward(progress);
         }
         // Move piece
+
     }
 
-    private void updateBoard() {
-        gameBoard.update();
-    }
+    protected abstract void updateBoard();
 
+    /**
+     * when this method is call the party start really
+     * @return 0 iff all is ok
+     */
     public int start() {
+        List<Player> playerList = new ArrayList<>();
+        playerList.addAll(Arrays.asList(this.gameBoard.getPlayers()));
+        Player playingPlayer = getFirstPlayingPlayer(playerList);
+        while (getWinner() == null){
+            playTurn(playingPlayer);
+            playingPlayer = playingPlayer.getNextPlayer();
+
+        }
 
         return 0;
+    }
+
+    protected Player getFirstPlayingPlayer(List<Player> playerList){
+        if (playerList.size() == 1){
+            return playerList.get(0);
+        }
+        else {
+            int max = 0;
+            List<Player> bestPlayerList = new ArrayList<>();
+            for (Player player :
+                    playerList) {
+                int diceValue = player.throwDice();
+                if (diceValue > max) {
+                    max = diceValue;
+                    bestPlayerList.removeAll(bestPlayerList);
+                    bestPlayerList.add(player);
+                } else if (diceValue == max) {
+                    max = diceValue;
+                    bestPlayerList.add(player);
+                }
+            }
+            return getFirstPlayingPlayer(bestPlayerList);
+        }
     }
 }

@@ -66,7 +66,13 @@ public class Piece {
     }
 
     public void moveForward(int progress){
-        this.setPosition(this.getPosition().getForwardPosition(progress));
+        if(isAtStable()){
+            this.setPosition(this.getPosition().getForwardPosition(1));
+        }
+        else {
+            this.setPosition(this.getPosition().getForwardPosition(progress));
+        }
+
     }
 
     public void moveAtStable(){
@@ -75,6 +81,10 @@ public class Piece {
 
     public boolean isAtImmuneSquare(){
         return this.isAtStar() || this.isAtColoredSquare();
+    }
+
+    public boolean isLegalMove(int diceProgress){
+       return  (this.position.getProgress() == PositionConstants.STABLE && diceProgress == 6) || (this.position.getProgress() >= PositionConstants.START && this.position.getProgress() + diceProgress <= PositionConstants.HOME);
     }
 
     public AbsolutePosition getAbsolutePosition(CaseMapping mapping){
@@ -171,6 +181,25 @@ public class Piece {
             return  mapping.getMapping(this.color, this.position.getProgress());
         }
 
+
+    }
+
+    public boolean isBetterPlay( Piece reference){
+        if (reference == null){
+            return true;
+        }
+        else if (reference.isAtStable()){
+            return false;
+        }
+        else if (!this.isAtImmuneSquare() && reference.isAtImmuneSquare()){
+            return true;
+        }
+        else if (reference.getPosition().getProgress() < this.getPosition().getProgress()){
+            return true;
+        }
+        else{
+            return false;
+        }
 
     }
 

@@ -1,12 +1,19 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.players;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Dice;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
+import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.SortByBestMove;
+
+import java.util.Collections;
+import java.util.List;
+
+import static java.util.Collections.*;
 
 public class ArtificialIntelligence extends Player{
 
-    public ArtificialIntelligence(String name, Color color) {
-        super(name, color);
+    public ArtificialIntelligence(String name, Color color, Dice dice) {
+        super(name, color, dice);
     }
 
     @Override
@@ -16,17 +23,20 @@ public class ArtificialIntelligence extends Player{
 
     @Override
     public Piece choosePiece() {
-        int choice = this.iaChoosePiece();
-        if (choice <= 0 || choice < 4){
+        List<Piece> movablePiece = getMovablePieces();
+        if (movablePiece.size() == 0){
             return null;
+        }else {
+            sort(movablePiece, new SortByBestMove());
+            return movablePiece.get(0);
         }
-        else {
-            return this.getPieces()[choice - 1];
-        }
+
+
+
 
     }
 
-    private int iaChoosePiece(){
-        return 0;
-    }
+
+
+
 }

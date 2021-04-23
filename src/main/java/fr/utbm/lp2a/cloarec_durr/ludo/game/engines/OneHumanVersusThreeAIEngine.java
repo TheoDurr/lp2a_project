@@ -1,6 +1,8 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.engines;
 
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
+import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameGui;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
 
 /**
@@ -9,6 +11,9 @@ import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
  * @author Florian CLOAREC, Théo DURR
  */
 public class OneHumanVersusThreeAIEngine extends Engine {
+
+    protected GameGui gui;
+
     /**
      * Initialize a new Coop VS IA Engine
      *
@@ -16,11 +21,15 @@ public class OneHumanVersusThreeAIEngine extends Engine {
      */
     public OneHumanVersusThreeAIEngine(String[] pseudos) {
         super(GameMode.oneHumanVersusTreeArtificialIntelligence, pseudos);
+        Piece[] pieces = new Piece[16];
+        for (int i = 0; i < 16; i++) {
+            pieces[i] = this.gameBoard.getPlayers()[i/4].getPieces()[i%4];
+        }
+        this.gui = new GameGui(GameMode.oneHumanVersusTreeArtificialIntelligence, pseudos, pieces);
     }
 
-    public void startGame() {
-        // We need to now which player will play in first
-        // The players launch the dices
 
+    protected void updateBoard() {
+        gui.updatePositions();
     }
 }

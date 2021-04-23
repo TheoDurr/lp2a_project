@@ -8,4 +8,6 @@ public class FourAIEngine extends Engine{
     public FourAIEngine(String[] pseudos){
         super(GameMode.fourArtificialIntelligence, pseudos);
     }
+
+    protected void updateBoard() {}
 }

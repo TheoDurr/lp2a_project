@@ -1,5 +1,6 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.items.board;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Dice;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.Position;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.players.ArtificialIntelligence;
@@ -15,24 +16,34 @@ public class Board {
     private Player[] players;
 
     public Board(GameMode mode, String[] pseudo) {
+        Dice dice = new Dice();
         this.players = new Player[4];
         switch (mode) {
             case fourArtificialIntelligence -> {
                 for (int i = 0; i < 4; i++) {
-                    this.players[i] = new ArtificialIntelligence(pseudo[i], Color.intToColor(i + 1));
+                    this.players[i] = new ArtificialIntelligence(pseudo[i], Color.intToColor(i + 1), dice);
                 }
             }
             case fourHumans -> {
                 for (int i = 0; i < 4; i++) {
-                    this.players[i] = new Human(pseudo[i], Color.intToColor(i + 1));
+                    this.players[i] = new Human(pseudo[i], Color.intToColor(i + 1), dice);
                 }
             }
             case oneHumanVersusTreeArtificialIntelligence -> {
                 for (int i = 0; i < 3; i++) {
-                    this.players[i] = new ArtificialIntelligence(pseudo[i], Color.intToColor(i + 1));
+                    this.players[i] = new ArtificialIntelligence(pseudo[i], Color.intToColor(i + 1), dice);
                 }
-                this.players[3] = new Human(pseudo[3], Color.intToColor(4));
+                this.players[3] = new Human(pseudo[3], Color.intToColor(4), dice);
             }
+        }
+        for (int i = 0; i < 4; i++) {
+            if (i == 3){
+                this.players[i].setNextPlayer(this.players[0]);
+            }
+            else{
+                this.players[i].setNextPlayer(this.players[i+1]);
+            }
+
         }
     }
 
@@ -63,4 +74,5 @@ public class Board {
     public void update() {
 
     }
+
 }

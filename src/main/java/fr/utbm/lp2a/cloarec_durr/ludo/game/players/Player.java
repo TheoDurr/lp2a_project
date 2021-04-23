@@ -16,15 +16,16 @@ public abstract class Player {
     private final Color color;
     private final Dice dice;
     private final Piece[] pieces;
+    private Player nextPlayer = null;
 
-    public Player(String name, Color color) {
+    public Player(String name, Color color, Dice dice) {
         this.name = name;
         this.color = color;
         this.pieces = new Piece[4];
         for (int i = 0; i < this.pieces.length; i++) {
             pieces[i] = new Piece(color, i + 1);
         }
-        this.dice = new Dice();
+        this.dice = dice;
     }
 
     //
@@ -41,6 +42,10 @@ public abstract class Player {
 
     public Piece[] getPieces() {
         return pieces;
+    }
+
+    public void setNextPlayer(Player nextPlayer){
+        this.nextPlayer = nextPlayer;
     }
 
     /**
@@ -96,7 +101,7 @@ public abstract class Player {
         for (Piece piece :
                 this.getPieces()) {
             int pieceProgress = piece.getPosition().getProgress();
-            if ((pieceProgress == PositionConstants.STABLE && dice.getValue() == 6) || (pieceProgress >= PositionConstants.START && pieceProgress + dice.getValue() <= PositionConstants.HOME)) {
+            if (piece.isLegalMove(this.dice.getValue())) {
                 movablePieces.add(piece);
             }
         }
@@ -133,5 +138,9 @@ public abstract class Player {
                 ", color=" + getColor() +
                 ", pieces=" + Arrays.toString(getPieces()) +
                 '}';
+    }
+
+    public Player getNextPlayer(){
+        return this.nextPlayer;
     }
 }

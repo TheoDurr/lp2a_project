@@ -5,8 +5,20 @@ import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
 
 import javax.swing.*;
 
+/**
+ * the class that manage the beginning of the party and create the engine
+ *
+ * @author Florian CLOAREC
+ *
+ */
+
 public class LudoParty {
     Engine gameEngine;
+
+    /**
+     * initialise the party
+     * the user chose the game mode, then he chose the pseudo of the player and last the engine is created
+     */
 
     public LudoParty(){
         String[] choosableGameMode = new String[]{GameMode.oneHumanVersusTreeArtificialIntelligence.toString(), GameMode.fourHumans.toString(), GameMode.fourArtificialIntelligence.toString(), GameMode.debug.toString()};
@@ -16,7 +28,6 @@ public class LudoParty {
         if (stringMode != null){
             if (stringMode.equals(GameMode.oneHumanVersusTreeArtificialIntelligence.toString())){
                 String pseudoChoose  = JOptionPane.showInputDialog(null, "Enter your pseudo");
-                System.out.println("pseudo : <"+ pseudoChoose + ">");
                 if (pseudoChoose != null && !pseudoChoose.equals("")){
                     pseudos[3] = pseudoChoose;
                 }
@@ -45,6 +56,10 @@ public class LudoParty {
             this.gameEngine = new FourAIEngine(pseudos);
         }
     }
+
+    /**
+     * Let the game start by starting the engine
+     */
 
     public void start(){
         this.gameEngine.start();
