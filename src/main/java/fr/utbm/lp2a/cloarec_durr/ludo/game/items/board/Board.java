@@ -12,9 +12,21 @@ import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class that represent the board of the game
+ *
+ * @author Florian CLOAREC
+ * @author Théo DURR
+ */
 public class Board {
-    private Player[] players;
 
+    private final Player[] players;
+
+    /**
+     * constructor of the class, create the player on the right class (Human or ArtificialIntelligence) depending on the gameMode
+     * @param mode : mode of the party useful to know what are the players
+     * @param pseudo : all the pseudos of the players
+     */
     public Board(GameMode mode, String[] pseudo) {
         Dice dice = new Dice();
         this.players = new Player[4];
@@ -47,10 +59,19 @@ public class Board {
         }
     }
 
+    /**
+     * get the players of the game
+     * @return the table with the players
+     */
     public Player[] getPlayers() {
         return players;
     }
 
+    /**
+     * get the list of all the pieces that are on a specified position/case of the game board
+     * @param position : the position of the case that we want to check
+     * @return a list of piece with all the piece of the case
+     */
     public List<Piece> getPiecesAtCoordinates(Position position){
         List<Piece> result = new ArrayList<>();
         for (Player player : getPlayers()) {
@@ -66,13 +87,4 @@ public class Board {
             return result;
         }
     }
-
-    public Player newPlayer(int playingPlayer) {
-        return this.players[(playingPlayer + 1) % 4];
-    }
-
-    public void update() {
-
-    }
-
 }
