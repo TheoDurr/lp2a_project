@@ -19,9 +19,9 @@ public class Board {
         Dice dice = new Dice();
         this.players = new Player[4];
         switch (mode) {
-            case fourArtificialIntelligence -> {
+            case fourArtificialIntelligence, debug -> {
                 for (int i = 0; i < 4; i++) {
-                    this.players[i] = new ArtificialIntelligence(pseudo[i], Color.intToColor(i + 1), dice);
+                    this.players[i] = new ArtificialIntelligence(pseudo[i],Color.intToColor(i + 1), dice);
                 }
             }
             case fourHumans -> {

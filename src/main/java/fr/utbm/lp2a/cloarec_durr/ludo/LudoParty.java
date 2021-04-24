@@ -62,15 +62,7 @@ public class LudoParty {
      */
 
     public void start(){
-        boolean continuePlay = true;
-        while (continuePlay){
-            this.gameEngine.start();
-            this.gameEngine.close();
-
-            String[] option = new String[]{"Yes", "No"};
-            String result =  (String)JOptionPane.showInputDialog(null, "Do you want to play again?" , "Play again?", JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
-            continuePlay = result.equals(option[0]);
-        }
-
+        this.gameEngine.start();
+        this.gameEngine.close();
     }
 }

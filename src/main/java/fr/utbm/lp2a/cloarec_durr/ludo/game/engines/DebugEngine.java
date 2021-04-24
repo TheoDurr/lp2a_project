@@ -17,17 +17,17 @@ public class DebugEngine extends Engine{
         for (int i = 0; i < 16; i++) {
             pieces[i] = this.gameBoard.getPlayers()[i/4].getPieces()[i%4];
         }
-        this.gui = new GameGui(GameMode.oneHumanVersusTreeArtificialIntelligence, pseudo, pieces);
+        this.gui = new GameGui(GameMode.debug, pseudo, pieces);
     }
 
     @Override
-    public int start() {
+    public void start() {
         String[] option =  new String[]{"Continuer", "Quitter"};
         for (int i = 0; i < 57; i++) {
             String result =  (String) JOptionPane.showInputDialog(null, "turn" + i, "test", JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
             if (result.equals(option[0])){
                 for(Player player : gameBoard.getPlayers()){
-                    this.movePiece(player.getPieces()[0], 1);
+                    player.getPieces()[0].moveForward(1);
 
                 }
                 this.gui.updatePositions();
@@ -38,7 +38,6 @@ public class DebugEngine extends Engine{
 
         }
 
-        return 0;
     }
 
     @Override

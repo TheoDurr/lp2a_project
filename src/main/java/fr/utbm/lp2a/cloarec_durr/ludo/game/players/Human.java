@@ -7,6 +7,7 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.SortByBestMove;
 
 import javax.swing.*;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -34,6 +35,7 @@ public class Human extends Player{
         }
         else {
             movablePiece.sort(new SortByBestMove());
+            Collections.reverse(movablePiece);
             String[] stringMovablePiece = new String[movablePiece.size()+1];
 
             for (int i = 0; i < movablePiece.size(); i++){
@@ -59,4 +61,8 @@ public class Human extends Player{
 
     }
 
+    @Override
+    public boolean isHumanPlayer() {
+        return true;
+    }
 }

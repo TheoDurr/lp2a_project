@@ -59,17 +59,23 @@ public class GameBoardGui extends JPanel {
      */
 
     public void paint(Graphics g){
+        //paint the game board image in back ground
         g.drawImage(gameBoardImage, 0, 0, getWidth(), getHeight(), this);
-        for (int i = 0; i < 16; i++) {
-            AbsolutePosition piecePosition = this.pieces[i].getAbsolutePosition(this.mapping);
-            g.drawImage(piecesImage[i], (int) (piecePosition.getX()*caseSize), (int) (piecePosition.getY()*caseSize), caseSize, caseSize, this);
-        }
+
+        //paint all the pseudo of the player
         g.setFont(new Font("Arial", Font.BOLD, 18));
         g.setColor(java.awt.Color.BLACK);
         g.drawString(pseudos[0], (2 * caseSize), (int) (5.7 * caseSize));
         g.drawString(pseudos[1], (11 * caseSize), (int) (5.7 * caseSize));
         g.drawString(pseudos[2], (11 * caseSize), (int) (9.7 * caseSize));
         g.drawString(pseudos[3], (2 * caseSize), (int) (9.7 * caseSize));
+
+        //paint each pieces at the right place
+        for (int i = 0; i < 16; i++) {
+            AbsolutePosition piecePosition = this.pieces[i].getAbsolutePosition(this.mapping);
+            g.drawImage(piecesImage[i], (int) (piecePosition.getX()*caseSize), (int) (piecePosition.getY()*caseSize), caseSize, caseSize, this);
+        }
+
     }
 
     /**

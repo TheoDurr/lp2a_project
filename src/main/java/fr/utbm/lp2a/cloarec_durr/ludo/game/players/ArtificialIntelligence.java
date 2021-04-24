@@ -8,8 +8,6 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.SortByBestMove;
 import java.util.Collections;
 import java.util.List;
 
-import static java.util.Collections.*;
-
 public class ArtificialIntelligence extends Player{
 
     public ArtificialIntelligence(String name, Color color, Dice dice) {
@@ -27,7 +25,8 @@ public class ArtificialIntelligence extends Player{
         if (movablePiece.size() == 0){
             return null;
         }else {
-            sort(movablePiece, new SortByBestMove());
+            movablePiece.sort(new SortByBestMove());
+            Collections.reverse(movablePiece);
             return movablePiece.get(0);
         }
 
@@ -36,7 +35,8 @@ public class ArtificialIntelligence extends Player{
 
     }
 
-
-
-
+    @Override
+    public boolean isHumanPlayer() {
+        return false;
+    }
 }

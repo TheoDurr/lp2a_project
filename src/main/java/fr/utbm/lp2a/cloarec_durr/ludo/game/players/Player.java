@@ -143,4 +143,6 @@ public abstract class Player {
     public Player getNextPlayer(){
         return this.nextPlayer;
     }
+
+    public abstract boolean isHumanPlayer();
 }
