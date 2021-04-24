@@ -45,4 +45,15 @@ public class DebugEngine extends Engine{
     protected void updateBoard() {
         this.gui.updatePositions();
     }
+
+    @Override
+    protected void printMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
+    @Override
+    public void close() {
+        gui.setVisible(false);
+        gui.dispose();
+    }
 }

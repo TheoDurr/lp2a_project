@@ -101,7 +101,7 @@ public class Position {
 
     /**
      * test if two position are equal even if they are not both in the same basis
-     * @param compareTo : the postition that we want to compare to this
+     * @param compareTo : the position that we want to compare to this
      * @return true if it is equal false else
      */
     public boolean equals(Position compareTo){

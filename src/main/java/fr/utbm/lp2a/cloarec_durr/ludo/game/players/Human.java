@@ -6,8 +6,7 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.SortByBestMove;
 
 import javax.swing.*;
-import java.util.Collection;
-import java.util.Collections;
+
 import java.util.List;
 
 
@@ -28,23 +27,13 @@ public class Human extends Player{
 
     @Override
     public Piece choosePiece() {
-        int choice = this.humanChoosePiece();
-        if (choice <= 0 || choice < 4){
-            return null;
-        }
-        else {
-            return this.getPieces()[choice - 1];
-        }
-    }
-
-    private int humanChoosePiece(){
         List<Piece> movablePiece = this.getMovablePieces();
         if (movablePiece.size() == 0){
             JOptionPane.showMessageDialog(null, this.getName() + " : You can't move any piece, you have to pass");
-            return 0;
+            return null;
         }
         else {
-            Collections.sort(movablePiece, new SortByBestMove());
+            movablePiece.sort(new SortByBestMove());
             String[] stringMovablePiece = new String[movablePiece.size()+1];
 
             for (int i = 0; i < movablePiece.size(); i++){
@@ -58,19 +47,16 @@ public class Human extends Player{
                 System.exit(1);
             }
 
-            int intResult = 0;
+            int intResult;
             try {
                 intResult = Integer.parseInt(result);
             } catch (NumberFormatException e) {
-                intResult = 0;
+                return null;
             }
+            return this.getPieces()[intResult-1];
 
-            if (intResult > 0 || intResult <= 4){
-                return intResult;
-            }
-            else{
-                return 0;
-            }
         }
+
     }
+
 }

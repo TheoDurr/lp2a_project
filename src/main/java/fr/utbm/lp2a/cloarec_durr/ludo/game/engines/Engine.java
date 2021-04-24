@@ -109,6 +109,8 @@ public abstract class Engine {
 
         }
 
+        Player winner = getWinner();
+        printMessage("Congratulation " + winner.getName() + " win the game");
         return 0;
     }
 
@@ -127,11 +129,13 @@ public abstract class Engine {
                     bestPlayerList.removeAll(bestPlayerList);
                     bestPlayerList.add(player);
                 } else if (diceValue == max) {
-                    max = diceValue;
                     bestPlayerList.add(player);
                 }
             }
             return getFirstPlayingPlayer(bestPlayerList);
         }
     }
+
+    protected abstract void printMessage(String message);
+    public abstract void close();
 }

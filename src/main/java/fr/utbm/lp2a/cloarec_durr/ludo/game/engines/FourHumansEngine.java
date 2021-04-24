@@ -4,6 +4,8 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameGui;
 import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
 
+import javax.swing.*;
+
 public class FourHumansEngine extends Engine {
     private GameGui gui;
 
@@ -21,5 +23,16 @@ public class FourHumansEngine extends Engine {
 
     protected void updateBoard() {
         gui.updatePositions();
+    }
+
+    @Override
+    protected void printMessage(String message) {
+        JOptionPane.showMessageDialog(null, message);
+    }
+
+    @Override
+    public void close() {
+        gui.setVisible(false);
+        gui.dispose();
     }
 }

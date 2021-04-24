@@ -10,4 +10,14 @@ public class FourAIEngine extends Engine{
     }
 
     protected void updateBoard() {}
+
+    @Override
+    protected void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    @Override
+    public void close() {
+
+    }
 }
