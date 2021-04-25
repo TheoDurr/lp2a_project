@@ -5,6 +5,7 @@
 \usepackage[top=2.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage{appendix}
 
 %Path relative to the .tex file containing the \includegraphics command
 \usepackage{graphicx}
@@ -25,12 +26,41 @@
     urlcolor=black
 }
 
+% Code + colors
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+
+% figures
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+
 \begin{document}
 
-    \include{titlepage.tex}
+    %\include{titlepage.tex}
 
     \pagebreak
-    \tableofcontents
+    %\tableofcontents
 
     \pagebreak
     \section{Introduction}
@@ -38,26 +68,100 @@
     % Talk about UML, OOP programming
     First of all, we performed an analysis of the subject by defining, the behaviour, the constraints or even the signature of each class and represented all of this in an \textbf{UML Class Diagram}.
     \subsection{Organization}
-    % Talk about task repartition
+    % Talk about task repartition, package organization
     % Talk about git, IntelliJ
-    We also used some tools like IntelliJ Idea as IDE, for time saving tasks like compiling, creating packages, making unit tests, and so on. As a \textbf{Version Control System (VCS)}, we used \emph{Git}
+    We also used some tools like IntelliJ Idea as IDE, for time saving tasks like compiling, creating packages, making unit tests, and so on. As a \textbf{Version Control System (VCS)}, we used \emph{Git}. It allowed us a better collaboration, a way to backup our files and, last but not least : It is a tool widely spread in the computer science jobs. So performing on this tool is a real benefit for the future.
+
+    \begin{center}
+        \includegraphics[width=2cm]{IntelliJ_IDEA_Icon.svg.png}
+        \hspace{2cm}
+        \includegraphics[width=2cm]{git.png}
+    \end{center}
+
+    Moreover, we decided to write this report in latex, as it is easier to insert some code, and mathematical formulas.
+
 
     \section{The game components}
     This project is split into two main components : \emph{game engines} and \emph{graphical user interface (GUI)}. The engines are the core of the game. They ensure IAs are following certain rules, as well as player, who are restricted in their choices with the GUI by displaying only "rules friendly" moves. We will detail some of the functionnalities.
 
     Before explaining the engines, we need to talk about the components needed for it. They play a main role in the OOP. Yet, they are quite simple. For a summarized view of the structure, see APPENDIX X
 
-    \subsection{The Player}
-    \subsubsection{Human}
+    \subsection{The Players}
+    The players are the entities playing the game. They have several actions such as moving a Piece, throw a dice, or pass. However, they are two types of player : real players (Humans) and Bots (Artificial Intelligence), their actions would be different, for instance when moving a piece. By following OOP principles, all the player types inherit from an abstract parent class called \verb|Player|. 
+    \subsubsection{Humans}
+    Humans are described in the child class \verb|Human|. The difference between them and AIs results in the actions with the board, such as throwing a dice, choosing the piece to move, as there is some GUI implemented in the class. Here is the code for the \verb|choosePiece| method :
+    \begin{lstlisting}
+    // Human.java
+    public Piece choosePiece() {
+        List<Piece> movablePiece = this.getMovablePieces();
+        if (movablePiece.size() == 0) {
+            JOptionPane.showMessageDialog(null, this.getName() + " : You can't move any piece, you have to pass");
+            return null;
+        } else {
+            movablePiece.sort(new SortByBestMove());
+            Collections.reverse(movablePiece);
+            String[] stringMovablePiece = new String[movablePiece.size() + 1];
 
-    \subsubsection{Artificial Intelligence}
+            for (int i = 0; i < movablePiece.size(); i++) {
+                stringMovablePiece[i] = "" + movablePiece.get(i).getNumber();
+
+            }
+            stringMovablePiece[movablePiece.size()] = "pass";
+            String result = (String) JOptionPane.showInputDialog(null, this.getName() + " : Choose the piece that you want move " + this.getDice().getValue() + " cases forward", this.getName() + " : Choose Piece", JOptionPane.QUESTION_MESSAGE, null, stringMovablePiece, stringMovablePiece[0]);
+
+            if (result == null) {
+                System.exit(1);
+            }
+
+            int intResult;
+            try {
+                intResult = Integer.parseInt(result);
+            } catch (NumberFormatException e) {
+                return null;
+            }
+            return this.getPieces()[intResult - 1];
+        }
+    }
+    \end{lstlisting}
+    We can see that there is some GUI code inside the \verb|Human| class. We found it was a good compromise between code organization and code efficiency.
+
+    \subsubsection{Artificial Intelligences}
+    Artificial Intelligences (AIs) work slightly different : there is no GUI code, as they are managed by the computer. So the work here was to implement the reflexion of the AI. As the main goal of this project was not to do machine learning, we simply implement a procedural set of \verb|if/else| statements in a separate java class:
+    \begin{lstlisting}
+    // SortByBestMove.java
+    public class SortByBestMove implements Comparator<Piece> {
+        @Override
+        public int compare(Piece piece1, Piece piece2) {
+            if (piece1 == null) {
+                return -1;
+            } else if (piece2 == null) {
+                return 1;
+            } else if (piece2.isAtStable() && !piece1.isAtStable()) {
+                return -1;
+            } else if (piece1.isAtStable() && !piece2.isAtStable()) {
+                return 1;
+            } else if (!piece1.isAtImmuneSquare() && piece2.isAtImmuneSquare()) {
+                return 1;
+            } else if (!piece2.isAtImmuneSquare() && piece1.isAtImmuneSquare()) {
+                return -1;
+            } else {
+                return piece1.getPosition().getProgress() - piece2.getPosition().getProgress();
+            }
+        }
+    }
+    \end{lstlisting}
 
     \subsection{The Coordinates System}
-
+    Each position object is composed of a color which is the color of the player and an integer "progress" which is the number of squares covered from the starting square. In the PositionConstant class, we make the link between the name of the important squares and the value of progress to which they correspond. Thus the stable is worth -1, the departure 0 and the arrival or Home is worth 57. Thanks to this system, the progression of each player on the game board is easy to manage, because it is enough to increment the number of squares you want to advance. But the problem arises when you want to compare the positions of the pieces of the other players, because each position is given in a base relative to each player represented by the color of this player. To do this we need to create a function that allows to convert a position from one color to another. To do this, using modular arithmetic and basic operations, we calculate the position in the new base (See \autoref{section:translating_coordinates}). Once this value has been calculated, the method creates a new Position object with this calculated value and the desired color.
     \subsection{The board}
 
     \section{The game engines}
     They are 3 engines in total. Each engine is called depending of the gamemode. By following OOP principles, all the engines inherit from an abstract parent class called \verb|Engine|.
+    \subsection{Gamemodes}
+    \subsection{Managing collisions}
+    \begin{center}
+        \includegraphics[width=0.7\textwidth]{Logigram.png}
+    \end{center}
 
     \subsection{4 Artificial Intelligences}
     This gamemode was not required in the specifications, but we made it for \emph{experimental purposes}. It allowed us to check if everything was working properly without having a GUI. The four players are AIs and are playing by following the rules.
@@ -67,6 +171,15 @@
     \subsection{1 Player versus 3 Artificial Intelligences}
 
     \section{The graphical user interface (GUI)}
+    \subsection{Aspect of the game}
+    \subsection{Interactions with the user}
     \subsection{Translating relatives coordinates in absolute coordinates}
+    \label{section:translating_coordinates}
+
+    \pagebreak
+    \appendix
+    \appendixpage
+    \addappheadtotoc
+    \section{Unified Modeling (UML) Diagram}
     
 \end{document}

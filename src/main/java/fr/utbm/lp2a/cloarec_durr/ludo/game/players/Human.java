@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class Human extends Player{
+public class Human extends Player {
 
     public Human(String name, Color color, Dice dice) {
         super(name, color, dice);
@@ -22,30 +22,29 @@ public class Human extends Player{
 
         JOptionPane.showMessageDialog(null, this.getName() + " : Click on the button to trow the dice");
         int value = this.getDice().Throw();
-        JOptionPane.showMessageDialog(null,  this.getName() + " : You get a " + value);
+        JOptionPane.showMessageDialog(null, this.getName() + " : You get a " + value);
         return value;
     }
 
     @Override
     public Piece choosePiece() {
         List<Piece> movablePiece = this.getMovablePieces();
-        if (movablePiece.size() == 0){
+        if (movablePiece.size() == 0) {
             JOptionPane.showMessageDialog(null, this.getName() + " : You can't move any piece, you have to pass");
             return null;
-        }
-        else {
+        } else {
             movablePiece.sort(new SortByBestMove());
             Collections.reverse(movablePiece);
-            String[] stringMovablePiece = new String[movablePiece.size()+1];
+            String[] stringMovablePiece = new String[movablePiece.size() + 1];
 
-            for (int i = 0; i < movablePiece.size(); i++){
+            for (int i = 0; i < movablePiece.size(); i++) {
                 stringMovablePiece[i] = "" + movablePiece.get(i).getNumber();
 
             }
             stringMovablePiece[movablePiece.size()] = "pass";
-            String result =  (String)JOptionPane.showInputDialog(null, this.getName() + " : Choose the piece that you want move " + this.getDice().getValue() + " cases forward" , this.getName() + " : Choose Piece", JOptionPane.QUESTION_MESSAGE, null, stringMovablePiece, stringMovablePiece[0]);
+            String result = (String) JOptionPane.showInputDialog(null, this.getName() + " : Choose the piece that you want move " + this.getDice().getValue() + " cases forward", this.getName() + " : Choose Piece", JOptionPane.QUESTION_MESSAGE, null, stringMovablePiece, stringMovablePiece[0]);
 
-            if(result == null){
+            if (result == null) {
                 System.exit(1);
             }
 
@@ -55,7 +54,7 @@ public class Human extends Player{
             } catch (NumberFormatException e) {
                 return null;
             }
-            return this.getPieces()[intResult-1];
+            return this.getPieces()[intResult - 1];
 
         }
 
