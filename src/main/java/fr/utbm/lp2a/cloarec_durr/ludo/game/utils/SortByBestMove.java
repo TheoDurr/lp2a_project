@@ -8,27 +8,19 @@ public class SortByBestMove implements Comparator<Piece> {
     @Override
     public int compare(Piece piece1, Piece piece2) {
 
-        if (piece1 == null){
+        if (piece1 == null) {
             return -1;
-        }
-        else if (piece2 == null){
+        } else if (piece2 == null) {
             return 1;
-        }
-
-        else if (piece2.isAtStable() && !piece1.isAtStable()){
+        } else if (piece2.isAtStable() && !piece1.isAtStable()) {
             return -1;
-        }
-        else if (piece1.isAtStable() && !piece2.isAtStable()){
+        } else if (piece1.isAtStable() && !piece2.isAtStable()) {
             return 1;
-        }
-
-        else if (!piece1.isAtImmuneSquare() && piece2.isAtImmuneSquare()){
+        } else if (!piece1.isAtImmuneSquare() && piece2.isAtImmuneSquare()) {
             return 1;
-        }
-        else if (!piece2.isAtImmuneSquare() && piece1.isAtImmuneSquare()){
+        } else if (!piece2.isAtImmuneSquare() && piece1.isAtImmuneSquare()) {
             return -1;
-        }
-        else {
+        } else {
             return piece1.getPosition().getProgress() - piece2.getPosition().getProgress();
         }
     }
