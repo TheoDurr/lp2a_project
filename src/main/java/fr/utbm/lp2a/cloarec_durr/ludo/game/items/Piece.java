@@ -1,8 +1,10 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.items;
 
+import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.AbsolutePosition;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.Position;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
+import fr.utbm.lp2a.cloarec_durr.ludo.gui.CaseMapping;
 
 
 public class Piece {
@@ -64,7 +66,13 @@ public class Piece {
     }
 
     public void moveForward(int progress){
-        this.setPosition(this.getPosition().getForwardPosition(progress));
+        if(isAtStable()){
+            this.setPosition(this.getPosition().getForwardPosition(1));
+        }
+        else {
+            this.setPosition(this.getPosition().getForwardPosition(progress));
+        }
+
     }
 
     public void moveAtStable(){
@@ -73,6 +81,126 @@ public class Piece {
 
     public boolean isAtImmuneSquare(){
         return this.isAtStar() || this.isAtColoredSquare();
+    }
+
+    public boolean isLegalMove(int diceProgress){
+       return  (this.position.getProgress() == PositionConstants.STABLE && diceProgress == 6) || (this.position.getProgress() >= PositionConstants.START && this.position.getProgress() + diceProgress <= PositionConstants.HOME);
+    }
+
+    public AbsolutePosition getAbsolutePosition(CaseMapping mapping){
+
+        if (this.isAtStable()){
+            AbsolutePosition piecePosition = mapping.getMapping(this.color, this.position.getProgress());
+            switch (this.color) {
+                case Green -> {
+                    switch (this.number) {
+                        case 2 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX() + 2, piecePosition.getY());
+                            break;
+                        }
+                        case 3 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX(), piecePosition.getY() + 2);
+                            break;
+                        }
+                        case 4 -> {
+                            piecePosition = new AbsolutePosition((piecePosition.getX() + 2), piecePosition.getY() + 2);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case Yellow -> {
+                    switch (this.number) {
+                        case 1 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX() - 2, piecePosition.getY());
+                            break;
+                        }
+                        case 2 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX(), piecePosition.getY());
+                            break;
+                        }
+                        case 3 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX() - 2, piecePosition.getY() + 2);
+                            break;
+                        }
+                        case 4 -> {
+                            piecePosition = new AbsolutePosition((piecePosition.getX()), piecePosition.getY() + 2);
+                            break;
+                        }
+                    }
+                    break;
+                }
+                case Blue -> {
+                    switch (this.number) {
+                        case 1 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX() - 2, piecePosition.getY() - 2);
+                            break;
+                        }
+                        case 2 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX(), piecePosition.getY() - 2);
+                            break;
+                        }
+                        case 3 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX() - 2, piecePosition.getY());
+                            break;
+                        }
+                        case 4 -> {
+                            piecePosition = new AbsolutePosition((piecePosition.getX()), piecePosition.getY());
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+                case Red -> {
+                    switch (this.number) {
+                        case 1 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX(), piecePosition.getY() - 2);
+                            break;
+                        }
+                        case 2 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX() + 2, piecePosition.getY() - 2);
+                            break;
+                        }
+                        case 3 -> {
+                            piecePosition = new AbsolutePosition(piecePosition.getX(), piecePosition.getY());
+                            break;
+                        }
+                        case 4 -> {
+                            piecePosition = new AbsolutePosition((piecePosition.getX() + 2), piecePosition.getY());
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+            return piecePosition;
+        }
+        else {
+            return  mapping.getMapping(this.color, this.position.getProgress());
+        }
+
+
+    }
+
+    public boolean isBetterPlay( Piece reference){
+        if (reference == null){
+            return true;
+        }
+        else if (reference.isAtStable()){
+            return false;
+        }
+        else if (!this.isAtImmuneSquare() && reference.isAtImmuneSquare()){
+            return true;
+        }
+        else if (reference.getPosition().getProgress() < this.getPosition().getProgress()){
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
 
 }

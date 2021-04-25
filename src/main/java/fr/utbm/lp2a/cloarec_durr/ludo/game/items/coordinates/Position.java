@@ -3,10 +3,21 @@ package fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates;
 
 import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 
+/**
+ * class for managing and storing the position of each piece in a relative base for each color
+ * in this system, a Position is a couple of a Color and a progress. The progress is the amount of case runed since the start and the stable has the value -1
+ * @author Florian CLOAREC
+ */
+
 public class Position {
     private int progress;
-    private Color playerColor;
+    private final Color playerColor;
 
+    /**
+     * create a new Position with the value given in parameter
+     * @param progress : the value that we want to give at the progress, for initialization of a piece put : PositionConstant.Stable
+     * @param playerColor : the color of the place who own the piece
+     */
     public Position(int progress, Color playerColor) {
         this.progress = progress;
         this.playerColor = playerColor;
@@ -24,18 +35,27 @@ public class Position {
         return playerColor;
     }
 
-    public void setPlayerColor(Color playerColor) {
-        this.playerColor = playerColor;
-    }
-
+    /**
+     * get an object that is the position of the home of the player
+     * @return a new Position object witch is the Home of the player
+     */
     public Position getHomePosition(){
         return new Position(PositionConstants.HOME, this.playerColor);
     }
 
+    /**
+     * get an objet that is the position of the stable of the player
+     * @return a new Position object witch is the Stable of the player
+     */
     public Position getStablePosition(){
         return new Position(PositionConstants.START, this.playerColor);
     }
 
+    /**
+     * get the position of the case that is n case forward for this piece
+     * @param n : the amount of case that we want to see forward
+     * @return a new Position object which is the position of the case n case forward
+     */
     public Position getForwardPosition(int n){
         if (this.progress + n <= PositionConstants.HOME){
             return new Position(this.progress + n, this.playerColor);
@@ -53,7 +73,11 @@ public class Position {
                 '}';
     }
 
-
+    /**
+     * convert this position in the position in the basis of the destination color player
+     * @param destination : the color of the player that we want to convert the position
+     * @return : a new Position object that is the same position as this but in the destination base
+     */
     public Position convertPositionColor(Color destination){
         int sourceNumber = this.getPlayerColor().toInt();
         int destinationNumber = destination.toInt();
@@ -75,8 +99,14 @@ public class Position {
 
     }
 
+    /**
+     * test if two position are equal even if they are not both in the same basis
+     * @param compareTo : the position that we want to compare to this
+     * @return true if it is equal false else
+     */
     public boolean equals(Position compareTo){
-        return compareTo.convertPositionColor(this.getPlayerColor()).getProgress() == this.getProgress();
+        Position convertPos = compareTo.convertPositionColor(this.getPlayerColor());
+        return convertPos != null && convertPos.getProgress() == this.getProgress();
     }
 
 

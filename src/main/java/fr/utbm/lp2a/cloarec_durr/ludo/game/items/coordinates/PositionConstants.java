@@ -1,5 +1,10 @@
 package fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates;
 
+/**
+ * Store all the constant very useful to calculate coordinate on the grind
+ * for each special case we associate the number of progress in the class Position
+ * @author Florian CLOAREC
+ */
 public final class PositionConstants {
     public static final int STABLE = -1;
     public static final int START = 0;

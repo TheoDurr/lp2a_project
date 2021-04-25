@@ -1,29 +1,26 @@
 package fr.utbm.lp2a.cloarec_durr.ludo;
 
-import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameGui;
-import fr.utbm.lp2a.cloarec_durr.ludo.gui.GameMode;
-import fr.utbm.lp2a.cloarec_durr.ludo.gui.MenuGui;
-
 import javax.swing.*;
 
+/**
+ * Main class where the program begin
+ */
 public class Main {
+
+    /**
+     * main function where the program begin, create a LudoParty and start it
+     * @param args : no argument needed
+     */
     public static void main(String[] args) {
-        //MenuGui menuGui = new MenuGui();
-        //GameMode gameMode = menuGui.getMode();
-        //String[] pseudos = menuGui.getPseudos();
+        boolean continuePlay = true;
+        while (continuePlay) {
 
-        LudoParty party = new LudoParty();
-        party.start();
+            LudoParty party = new LudoParty();
+            party.start();
 
-        /*GameMode gameMode = GameMode.oneHumanVersusTreeArtificialIntelligence;
-        String[] pseudos = new String[]{"Player1", "Player2", "Player3", "Player4"};
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                GameGui gameGui = new GameGui(gameMode, pseudos);
-            }
-        });*/
-
-
+            String[] option = new String[]{"Yes", "No"};
+            String result =  (String) JOptionPane.showInputDialog(null, "Do you want to play again?" , "Play again?", JOptionPane.QUESTION_MESSAGE, null, option, option[0]);
+            continuePlay = result.equals(option[0]);
+        }
     }
 }

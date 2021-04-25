@@ -23,7 +23,7 @@ public class Dice extends Random {
     }
 
     public int Throw() {
-        this.setValue(this.nextInt(5) + 1);
+        this.setValue(this.nextInt(6) + 1);
         return this.getValue();
     }
 
