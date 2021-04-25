@@ -2,9 +2,7 @@ package fr.utbm.lp2a.cloarec_durr.ludo.game.players;
 
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Dice;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
-import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.PositionConstants;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -48,23 +46,6 @@ public abstract class Player {
         this.nextPlayer = nextPlayer;
     }
 
-    /**
-     * Get the piece index
-     *
-     * @param p the piece the index to get
-     * @return int : the index of the piece (-1 if not found)
-     */
-    public int getPieceIndex(Piece p) {
-        for (int i = 0; i < pieces.length; i++) {
-            if (pieces[i] == p) {
-                return i;
-            }
-        }
-        // No piece Found
-        // Should never happen
-        return -1;
-    }
-
     public Dice getDice() {
         return dice;
     }
@@ -100,26 +81,11 @@ public abstract class Player {
 
         for (Piece piece :
                 this.getPieces()) {
-            int pieceProgress = piece.getPosition().getProgress();
             if (piece.isLegalMove(this.dice.getValue())) {
                 movablePieces.add(piece);
             }
         }
         return movablePieces;
-    }
-
-    /**
-     * Ask the user the piece to move and moves it of N squares
-     *
-     * @param pieceToMove The piece to move
-     */
-    public void movePiece(Piece pieceToMove) {
-        int pieceIndex = getPieceIndex(pieceToMove);
-        if (pieceIndex != -1) {
-            pieces[pieceIndex].moveForward(dice.getValue());
-        } else {
-            System.out.println("ERROR : Piece not found");
-        }
     }
 
     /**

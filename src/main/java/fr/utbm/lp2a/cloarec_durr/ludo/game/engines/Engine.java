@@ -143,7 +143,7 @@ public abstract class Engine {
                 int diceValue = player.throwDice();
                 if (diceValue > max) {
                     max = diceValue;
-                    bestPlayerList.removeAll(bestPlayerList);
+                    bestPlayerList = new ArrayList<>();
                     bestPlayerList.add(player);
                 } else if (diceValue == max) {
                     bestPlayerList.add(player);

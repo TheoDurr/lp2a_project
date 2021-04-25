@@ -13,7 +13,7 @@ import javax.swing.*;
  */
 
 public class LudoParty {
-    Engine gameEngine;
+    private final Engine gameEngine;
 
     /**
      * initialise the party
@@ -56,6 +56,7 @@ public class LudoParty {
             this.gameEngine = new FourAIEngine(pseudos);
         }
     }
+
 
     /**
      * Let the game start by starting the engine

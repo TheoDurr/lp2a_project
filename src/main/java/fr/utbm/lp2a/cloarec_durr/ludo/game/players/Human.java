@@ -10,13 +10,26 @@ import javax.swing.*;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * class that represent a player that is a Human, so the user of the program
+ * @author Florian CLOAREC
+ * @author Théo DURR
+ */
 public class Human extends Player{
-
+    /**
+     * basic constructor of the class, just call the super constructor
+     * @param name : name of the player
+     * @param color : color of the player
+     * @param dice : value of the dice of the party
+     */
     public Human(String name, Color color, Dice dice) {
         super(name, color, dice);
     }
 
+    /**
+     * throw the dice of the player by sending to him a popup for requesting the throw and on for the result of the dice
+     * @return : a random int between 1 and 6
+     */
     @Override
     public int throwDice() {
 
@@ -26,6 +39,11 @@ public class Human extends Player{
         return value;
     }
 
+    /**
+     * Let the user choose the piece that he can move, send to him a popup where he can choose the piece that he prefer
+     * only print the movable piece and in the order of croissant best play
+     * @return : the piece that the user choose
+     */
     @Override
     public Piece choosePiece() {
         List<Piece> movablePiece = this.getMovablePieces();
@@ -60,7 +78,10 @@ public class Human extends Player{
         }
 
     }
-
+    /**
+     * check if the player is human in this case yes
+     * @return true if it is a human
+     */
     @Override
     public boolean isHumanPlayer() {
         return true;
