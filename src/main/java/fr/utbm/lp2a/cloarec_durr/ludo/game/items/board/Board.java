@@ -87,12 +87,5 @@ public class Board {
         }
     }
 
-    public Player newPlayer(int playingPlayer) {
-        return this.players[(playingPlayer + 1) % 4];
-    }
-
-    public void update() {
-
-    }
 
 }
