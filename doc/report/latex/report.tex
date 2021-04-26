@@ -223,13 +223,37 @@
     The debug gamemode is only made for \emph{test purposes}. It moves all the pieces square by square.
 
     \section{The graphical user interface (GUI)}
+
+    In order to create the graphical user interface, we use the framework swing. We choose this one and not another one for different reason, first it is very easy to learn and flexible to use for a small project. Moreover, there is a lot of tutorial about it on internet, and it has been very useful for us to learn fast and to on time.
+
+
     \subsection{Aspect of the game}
+
+    %plateau de jeu
+
+    This is our GUI. To do that we use a class Gamegui that extend JFrame who create the window of our game and set is behaviour. Inside this we add an object of gameBoardGui who extend JPanel. This second class create the image of the game board. This image is just a picture of a game board that we found on the internet, and we paint in front of it the name of the player and the piece on the right place.
+
+
+
     \subsection{Interactions with the user}
+
+    For the interaction with the user we choose to not use a button or selection on the same window that contains the  game board. Instead of that we prefer to use a pop-up window given by the class JOptionPane. In this new window the user can choose the piece that he want to move or click on a button to throw the dice or just read the message sending to him by the game. At the beginning of the party to let the player choose the game mode and the pseudo of the player. At the end we suggest to the player to continue playing by the same way. In the window that ask the user to choose the piece that he want to move, we just show him the piece that he is able to move according to the rules. Moreover, the piece on list are sorted by the best move in first so if the user just press ENTER it will play the best move directly.
+    %tout les type de popup
+
     \subsection{Translating relatives coordinates in absolute coordinates}
+
+    One of the biggest problem with our coordinate system is the difficulty to know the position where we have to print each piece on the screen. To solve this problem we create the class CaseMapping, who contain a big array that make the like between the relative position and the absolute position. To generate this array we can’t use a mathematic formula because the sequence of the case on the board is not linear or logical. So we do it case by case, and we can group the different straight line.  From one player to another the mapping is the same, but we just have to turn the board for 90°. So to avoid long copy and paste is used trigonometric formula to do this computation. Where i is the number of the player and X and Y the initial coordinate common to all the player.
+
+    rotatedX = cos(i*90)*X + sin(i*90)*Y
+    rotatedY = sin(i*90)*X + cos(i*90)*Y
+
 
     \section{Conclusion}
     \subsection{Improvements paths}
     \subsection{Benefits of this project}
+
+    The time to complete the project was very short so if we get more time we should be able to do more feature. About the Gui there is a lot of things to improve, first if two pieces are on the same case on the board the piece that arrived the last is totally hide by the other piece that is on top, we should manage it to be able to see the two piece in the same time. Second we don’t use multi threading to separate the GUI and the engine so if  one of them crash the whole application is down. Third we don’t use double buffering when we paint the piece on the board. So when the piece position is updating, the user can see a short moment where the pieces and the pseudo disappear and reappears. And if there is a lot of updating in the same time it is very ugly for the user. Finally, there is in the code a lot of optimization that we can do to save more memory or run the programme faster, one of them is to avoid the use of the pop-up window who use a lot of resources each time the window is created.
+
     \label{section:translating_coordinates}
 
     \pagebreak
