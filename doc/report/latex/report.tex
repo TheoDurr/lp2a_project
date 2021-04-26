@@ -184,24 +184,43 @@
        }   
     \end{lstlisting}
     \subsubsection{The pieces \& the dice}
+    Pieces and Dice are both objects, they contain several methods such as moving a piece, throw the dice, etc\dots. We decided to use pictures for the pieces, with a number and the four colors.
+
+    \begin{center}
+        \includegraphics[width=2cm]{pieceBlue1.png}
+        \hspace{2cm}
+        \includegraphics[width=2cm]{pieceGreen2.png}
+    \end{center}
 
     \section{The game engines}
     They are 3 engines in total. Each engine is called depending of the gamemode. By following OOP principles, all the engines inherit from an abstract parent class called \verb|Engine|.
     \subsection{Managing collisions}
-    Managing collisions is a central feature of the game, it ensure pieces go to the stable according to the rules of the game (and according to the \autoref{fig:logigram})
+    Managing collisions is a central feature of the game, it ensure pieces go to the stable according to the rules of the game (and according to the \autoref{app:algorithm})
     
     This feature is required by the rules of the game, we implemented it, but with more time, we could have tested it. We might expect some bugs.
     % Implemented, but not tested
 
     \subsection{Gamemodes}
     \label{section:gamemodes}
+    In this game, there is various gamemodes, designed for a certain number of playstyles. You can select it at the beginning of the game.
 
-    \subsubsection{4 Artificial Intelligences}
-    This gamemode was not required in the specifications, but we made it for \emph{experimental purposes}. It allowed us to check if everything was working properly without having a GUI. The four players are AIs and are playing by following the rules.
+    \begin{center}
+        \includegraphics{gamemodeSelection.png}
+    \end{center}
+
+    The gamemode selected displays at the status bar of the windows. With theses modes, player can play alone, with four player on the same computer, or watch AIs play (4 AIs gamemode is best for test purposes).
+
+    \subsubsection{1 Player versus 3 Artificial Intelligences}
+    This is one of the main gamemode, where one player plays against 3 AIs.
+
     \subsubsection{4 Players}
     This gamemode unlieve the entire potential of the GUI, by allowing four players to play in the same time on the same computer. Each player plays one after the other.
 
-    \subsubsection{1 Player versus 3 Artificial Intelligences}
+    \subsubsection{4 Artificial Intelligences}
+    This gamemode was not required in the specifications, but we made it for \emph{experimental purposes}. It allowed us to check if everything was working properly without having a GUI. The four players are AIs and are playing by following the rules.
+    
+    \subsubsection{Debug}
+    The debug gamemode is only made for \emph{test purposes}. It moves all the pieces square by square.
 
     \section{The graphical user interface (GUI)}
     \subsection{Aspect of the game}
@@ -222,7 +241,8 @@
 
     \pagebreak
     \section{Simplified algorithm}
-    \label{fig:algorithm}
+    \label{app:algorithm}
+    This figure explains the reflexion behind the colision detection method in the \verb|Engine|.
     \begin{figure}[h]
         \centering
         \vspace{0.3cm}
