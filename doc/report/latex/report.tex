@@ -51,10 +51,6 @@
   tabsize=3
 }
 
-% figures
-\usepackage{tikz}
-\usetikzlibrary{shapes}
-
 \begin{document}
 
     \include{titlepage.tex}
@@ -68,10 +64,10 @@
     % Talk about UML, OOP programming
     First of all, we performed an analysis of the subject by defining, the behaviour, the constraints or even the signature of each class and represented all of this in an \textbf{UML Class Diagram}.
     \subsection{Organization}
-    % Talk about task repartition, package organization
+    % Talk about task repartition, package organization, documentation
+    \subsubsection{Tools used}
     % Talk about git, IntelliJ
     We also used some tools like IntelliJ Idea as IDE, for time saving tasks like compiling, creating packages, making unit tests, and so on. As a \textbf{Version Control System (VCS)}, we used \emph{Git}. It allowed us a better collaboration, a way to backup our files and, last but not least : It is a tool widely spread in the computer science jobs. So performing on this tool is a real benefit for the future.
-
     \begin{center}
         \includegraphics[width=2cm]{IntelliJ_IDEA_Icon.svg.png}
         \hspace{2cm}
@@ -79,7 +75,17 @@
     \end{center}
 
     Moreover, we decided to write this report in latex, as it is easier to insert some code, and mathematical formulas.
+    \subsubsection{Documentation of the source files}
+    As we used IntelliJ Idea, documenting the code was really simple. We trigger the snippet by typing \verb|/**|, then by pressing \verb|<Tab>| and it generates the documentation template, all we need to do is to fill in the description of the parameters and the return, and to provide a description of the function.
 
+    \begin{lstlisting}
+        // Example of documentation generation
+        /**
+        * PUT DESCRIPTION HERE
+        * @param position PUT PARAMETER DESCRIPTION HERE
+        * @return PUT RETURN DESCRIPTION HERE
+        */
+    \end{lstlisting}
 
     \section{The game components}
     This project is split into two main components : \emph{game engines} and \emph{graphical user interface (GUI)}. The engines are the core of the game. They ensure IAs are following certain rules, as well as player, who are restricted in their choices with the GUI by displaying only "rules friendly" moves. We will detail some of the functionnalities.
@@ -154,17 +160,41 @@
     \subsection{The Coordinates System}
     Each position object is composed of a color which is the color of the player and an integer "progress" which is the number of squares covered from the starting square. In the PositionConstant class, we make the link between the name of the important squares and the value of progress to which they correspond. Thus the stable is worth -1, the departure 0 and the arrival or Home is worth 57. Thanks to this system, the progression of each player on the game board is easy to manage, because it is enough to increment the number of squares you want to advance. But the problem arises when you want to compare the positions of the pieces of the other players, because each position is given in a base relative to each player represented by the color of this player. To do this we need to create a function that allows to convert a position from one color to another. To do this, using modular arithmetic and basic operations, we calculate the position in the new base (See \autoref{section:translating_coordinates}). Once this value has been calculated, the method creates a new Position object with this calculated value and the desired color.
     \subsection{The board}
-    \subsubsection{The pieces}
+    The board of the game is quite simple. It contains all the players (no matter which type they are), and a Dice. Its complexity only results in its constructor, which is depending of the gamemode (See \autoref{section:gamemodes}). The \verb|Board| class contains some methods, such as \verb|getPiecesAtCoordinates| :
+    \begin{lstlisting}
+        /**
+        * Computes the pieces at given coordinates
+        * @param position the position to check
+        * @return List of piece if found, null either
+        */
+       public List<Piece> getPiecesAtCoordinates(Position position){
+           List<Piece> result = new ArrayList<>();
+           for (Player player : getPlayers()) {
+               for (Piece piece : player.getPieces()) {
+                   if (piece.getPosition().equals(position)) {
+                       result.add(piece);
+                   }
+               }
+           }
+           if (result.isEmpty()) {
+               return null;
+           } else {
+               return result;
+           }
+       }   
+    \end{lstlisting}
+    \subsubsection{The pieces \& the dice}
 
     \section{The game engines}
     They are 3 engines in total. Each engine is called depending of the gamemode. By following OOP principles, all the engines inherit from an abstract parent class called \verb|Engine|.
     \subsection{Managing collisions}
+    Managing collisions is a central feature of the game, it ensure pieces go to the stable according to the rules of the game (and according to the \autoref{fig:logigram})
+    
+    This feature is required by the rules of the game, we implemented it, but with more time, we could have tested it. We might expect some bugs.
     % Implemented, but not tested
-    \begin{center}
-        \includegraphics[width=0.5\textwidth]{Logigram.png}
-    \end{center}
 
     \subsection{Gamemodes}
+    \label{section:gamemodes}
 
     \subsubsection{4 Artificial Intelligences}
     This gamemode was not required in the specifications, but we made it for \emph{experimental purposes}. It allowed us to check if everything was working properly without having a GUI. The four players are AIs and are playing by following the rules.
@@ -189,5 +219,14 @@
     \addappheadtotoc
     \section{Unified Modeling (UML) Diagram}
     \subsection{Engine}
+
+    \pagebreak
+    \section{Simplified algorithm}
+    \label{fig:algorithm}
+    \begin{figure}[h]
+        \centering
+        \vspace{0.3cm}
+        \includegraphics{Logigram.png}
+    \end{figure}
     
 \end{document}
