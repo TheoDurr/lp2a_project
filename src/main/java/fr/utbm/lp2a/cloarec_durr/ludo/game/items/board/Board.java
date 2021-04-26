@@ -21,7 +21,7 @@ public class Board {
         switch (mode) {
             case fourArtificialIntelligence, debug -> {
                 for (int i = 0; i < 4; i++) {
-                    this.players[i] = new ArtificialIntelligence(pseudo[i],Color.intToColor(i + 1), dice);
+                    this.players[i] = new ArtificialIntelligence(pseudo[i], Color.intToColor(i + 1), dice);
                 }
             }
             case fourHumans -> {
@@ -37,11 +37,10 @@ public class Board {
             }
         }
         for (int i = 0; i < 4; i++) {
-            if (i == 3){
+            if (i == 3) {
                 this.players[i].setNextPlayer(this.players[0]);
-            }
-            else{
-                this.players[i].setNextPlayer(this.players[i+1]);
+            } else {
+                this.players[i].setNextPlayer(this.players[i + 1]);
             }
 
         }
@@ -51,7 +50,13 @@ public class Board {
         return players;
     }
 
-    public List<Piece> getPiecesAtCoordinates(Position position){
+    /**
+     * Computes the pieces at given coordinates
+     *
+     * @param position the position to check
+     * @return List of piece if found, null either
+     */
+    public List<Piece> getPiecesAtCoordinates(Position position) {
         List<Piece> result = new ArrayList<>();
         for (Player player : getPlayers()) {
             for (Piece piece : player.getPieces()) {

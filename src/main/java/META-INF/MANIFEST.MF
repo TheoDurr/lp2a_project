@@ -1,0 +1,3 @@
+Manifest-Version: 1.0
+Main-Class: fr.utbm.lp2a.cloarec_durr.ludo.Main
+
