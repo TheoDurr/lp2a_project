@@ -19,7 +19,6 @@ import java.util.List;
  * @author Théo DURR
  */
 public class Board {
-
     private final Player[] players;
 
     /**
@@ -87,4 +86,13 @@ public class Board {
             return result;
         }
     }
+
+    public Player newPlayer(int playingPlayer) {
+        return this.players[(playingPlayer + 1) % 4];
+    }
+
+    public void update() {
+
+    }
+
 }
