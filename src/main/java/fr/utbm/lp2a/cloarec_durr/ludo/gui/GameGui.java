@@ -14,9 +14,8 @@ import java.awt.*;
 public class GameGui extends JFrame{
 
     private GameBoardGui gameBoardGui;
-    private JPanel mainPanel;
-    private Piece[] pieces;
-    private String[] pseudos;
+    private final Piece[] pieces;
+    private final String[] pseudos;
 
     /**
      * Create the window by calling the super methode of JFrame
@@ -41,16 +40,16 @@ public class GameGui extends JFrame{
         ImageIcon icon = new ImageIcon("src/main/resources/ludo_game_board.png");
         this.setIconImage(icon.getImage());
 
-        /** set the property of the windows */
+        /* set the property of the windows */
         this.setSize(640, 700);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        /** add the main panel to the window */
-        this.mainPanel = buildContentPane();
-        this.setContentPane(this.mainPanel);
+        /* add the main panel to the window */
+        JPanel mainPanel = buildContentPane();
+        this.setContentPane(mainPanel);
 
-        /** set the visibility of the window*/
+        /* set the visibility of the window*/
         this.setVisible(true);
     }
 

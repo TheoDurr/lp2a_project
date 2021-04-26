@@ -10,11 +10,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * class that is the game engine who perform all the action to make the party working and who contain the board
+ *
+ * @author Florian CLOAREC
+ * @author Théo DURR
+ */
+
 public abstract class Engine {
     protected Board gameBoard;
     private int diceValue = 6;
 
-
+    /**
+     * simple constructor that just coll the constructor of the board
+     */
     public Engine(GameMode gameMode, String[] pseudo) {
         this.gameBoard = new Board(gameMode, pseudo);
     }
@@ -22,7 +31,7 @@ public abstract class Engine {
     /**
      * Determines if there's a winner
      *
-     * @return the winner (null otherwise)
+     * @return the winner player (null otherwise)
      */
     private Player getWinner() {
         for (Player player : gameBoard.getPlayers()) {
@@ -35,6 +44,8 @@ public abstract class Engine {
 
     /**
      * Play the turn of one player
+     *
+     * @param playingPlayer: the player that is the turn to play
      */
     protected void playTurn(Player playingPlayer) {
         if (playingPlayer.isHumanPlayer()){
@@ -63,7 +74,6 @@ public abstract class Engine {
      */
     protected void movePiece(Piece pieceToMove, int progress) {
         // Check if we can move the piece
-        // @TODO understand why the pieces don't move when we want and implement processConflict !! Good night my self
         if (pieceToMove.isLegalMove(progress)){
             //process all the conflict, it mean that the other piece could go back to stable
             processConflict(pieceToMove, progress);
@@ -72,6 +82,11 @@ public abstract class Engine {
         }
     }
 
+    /**
+     * Check if there some other piece in the case where the piece that we want to move go, if it is the case decide if it go back to the stable or if it do nothing
+     * @param pieceToMove The piece to move
+     * @param progress The number of squares to move
+     */
     protected void processConflict(Piece pieceToMove, int progress){
         Position futurePosition = new Position(pieceToMove.getPosition().getProgress() + progress, pieceToMove.getColor());
         // create a list whit all the piece at the future position
@@ -90,14 +105,16 @@ public abstract class Engine {
 
     }
 
+    /**
+     * update the board on the gui if there exist
+     */
     protected abstract void updateBoard();
 
     /**
      * when this method is call the party start really
      */
     public void start() {
-        List<Player> playerList = new ArrayList<>();
-        playerList.addAll(Arrays.asList(this.gameBoard.getPlayers()));
+        List<Player> playerList = new ArrayList<>(Arrays.asList(this.gameBoard.getPlayers()));
         Player playingPlayer = getFirstPlayingPlayer(playerList);
         while (getWinner() == null){
             playTurn(playingPlayer);
@@ -109,6 +126,11 @@ public abstract class Engine {
         printMessage("Congratulation " + winner.getName() + " win the game");
     }
 
+    /**
+     * look for the first player who will start the party recursively
+     * @param playerList : list of the player that try to play first (not all the player if there is a tie and a second recursive call)
+     * @return the player that "win" the dice turn
+     */
     protected Player getFirstPlayingPlayer(List<Player> playerList){
         if (playerList.size() == 1){
             return playerList.get(0);
@@ -121,7 +143,7 @@ public abstract class Engine {
                 int diceValue = player.throwDice();
                 if (diceValue > max) {
                     max = diceValue;
-                    bestPlayerList.removeAll(bestPlayerList);
+                    bestPlayerList = new ArrayList<>();
                     bestPlayerList.add(player);
                 } else if (diceValue == max) {
                     bestPlayerList.add(player);
@@ -131,6 +153,14 @@ public abstract class Engine {
         }
     }
 
+    /**
+     * print a message to the user on a different way depending of the child engine
+     * @param message : message that we want to print to user
+     */
     protected abstract void printMessage(String message);
+
+    /**
+     * clean close of the party and close the gui if exist
+     */
     public abstract void close();
 }

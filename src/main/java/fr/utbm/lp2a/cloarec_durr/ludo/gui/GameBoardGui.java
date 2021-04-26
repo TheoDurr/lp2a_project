@@ -28,7 +28,6 @@ public class GameBoardGui extends JPanel {
     private final CaseMapping mapping;
 
     private final int caseSize = 40; //pixels
-    private final int boardSize = 15; // cases
 
     /**
      * create the game board gui, initialize the different image from the file and create the CaseMapping
@@ -44,13 +43,17 @@ public class GameBoardGui extends JPanel {
         try {
             gameBoardImage = ImageIO.read(new File("src/main/resources/ludo_game_board.png"));
             for (int i = 0; i < 16; i++) {
-                piecesImage[i] = ImageIO.read(new File("src/main/resources/piece/piece" + Color.intToColor((i / 4) +1).toString() + ((i%4)+1) + ".png"));
+                if (Color.intToColor((i / 4) +1) != null) {
+                    piecesImage[i] = ImageIO.read(new File("src/main/resources/piece/piece" + Color.intToColor((i / 4) +1).toString() + ((i%4)+1) + ".png"));
+                }
             }
         }
         catch(IOException exception){
             exception.printStackTrace();
         }
-        setPreferredSize(new Dimension(caseSize*boardSize, caseSize*boardSize));
+        // cases
+        int boardSize = 15;
+        setPreferredSize(new Dimension(caseSize* boardSize, caseSize* boardSize));
     }
 
     /**
