@@ -57,10 +57,10 @@
 
 \begin{document}
 
-    %\include{titlepage.tex}
+    \include{titlepage.tex}
 
     \pagebreak
-    %\tableofcontents
+    \tableofcontents
 
     \pagebreak
     \section{Introduction}
@@ -154,26 +154,33 @@
     \subsection{The Coordinates System}
     Each position object is composed of a color which is the color of the player and an integer "progress" which is the number of squares covered from the starting square. In the PositionConstant class, we make the link between the name of the important squares and the value of progress to which they correspond. Thus the stable is worth -1, the departure 0 and the arrival or Home is worth 57. Thanks to this system, the progression of each player on the game board is easy to manage, because it is enough to increment the number of squares you want to advance. But the problem arises when you want to compare the positions of the pieces of the other players, because each position is given in a base relative to each player represented by the color of this player. To do this we need to create a function that allows to convert a position from one color to another. To do this, using modular arithmetic and basic operations, we calculate the position in the new base (See \autoref{section:translating_coordinates}). Once this value has been calculated, the method creates a new Position object with this calculated value and the desired color.
     \subsection{The board}
+    \subsubsection{The pieces}
 
     \section{The game engines}
     They are 3 engines in total. Each engine is called depending of the gamemode. By following OOP principles, all the engines inherit from an abstract parent class called \verb|Engine|.
-    \subsection{Gamemodes}
     \subsection{Managing collisions}
+    % Implemented, but not tested
     \begin{center}
-        \includegraphics[width=0.7\textwidth]{Logigram.png}
+        \includegraphics[width=0.5\textwidth]{Logigram.png}
     \end{center}
 
-    \subsection{4 Artificial Intelligences}
+    \subsection{Gamemodes}
+
+    \subsubsection{4 Artificial Intelligences}
     This gamemode was not required in the specifications, but we made it for \emph{experimental purposes}. It allowed us to check if everything was working properly without having a GUI. The four players are AIs and are playing by following the rules.
-    \subsection{4 Players}
+    \subsubsection{4 Players}
     This gamemode unlieve the entire potential of the GUI, by allowing four players to play in the same time on the same computer. Each player plays one after the other.
 
-    \subsection{1 Player versus 3 Artificial Intelligences}
+    \subsubsection{1 Player versus 3 Artificial Intelligences}
 
     \section{The graphical user interface (GUI)}
     \subsection{Aspect of the game}
     \subsection{Interactions with the user}
     \subsection{Translating relatives coordinates in absolute coordinates}
+
+    \section{Conclusion}
+    \subsection{Improvements paths}
+    \subsection{Benefits of this project}
     \label{section:translating_coordinates}
 
     \pagebreak
@@ -181,5 +188,6 @@
     \appendixpage
     \addappheadtotoc
     \section{Unified Modeling (UML) Diagram}
+    \subsection{Engine}
     
 \end{document}
