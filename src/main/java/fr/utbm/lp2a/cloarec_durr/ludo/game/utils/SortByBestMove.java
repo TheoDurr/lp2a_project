@@ -4,7 +4,16 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.items.Piece;
 
 import java.util.Comparator;
 
+/**
+ * class that used to compare the move of two movable pieces
+ */
 public class SortByBestMove implements Comparator<Piece> {
+    /**
+     * determine witch move of the two piece is the best one
+     * @param piece1 : the first piece to move
+     * @param piece2 : the second piece to move
+     * @return : a positive int iff 1 is better 0 iff equal and a negative else
+     */
     @Override
     public int compare(Piece piece1, Piece piece2) {
 

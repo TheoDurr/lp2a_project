@@ -3,10 +3,18 @@ package fr.utbm.lp2a.cloarec_durr.ludo.gui;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.items.coordinates.AbsolutePosition;
 import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 
+/**
+ * class for making the conversion from the relative position of each piece and the coordinate that we have to print on screen
+ *
+ * @author Florian CLOAREC
+ */
 public class CaseMapping {
 
     private final AbsolutePosition[][] colorMapping;
 
+    /**
+     * basic constructor of the class, create a table with all the Absolute position corresponding to each progress in each color
+     */
     public CaseMapping() {
         this.colorMapping = new AbsolutePosition[4][];
         for (int i = 0; i < 4; i++) {
@@ -72,6 +80,12 @@ public class CaseMapping {
         }
     }
 
+    /**
+     * read the table to get the value of this position
+     * @param color : the color of the piece that we want to print
+     * @param progress : the progress of the piece that we want to print
+     * @return : the absolute position of the piece for printing it on the screen
+     */
     public AbsolutePosition getMapping(Color color, int progress){
         return this.colorMapping[color.toInt() - 1][progress + 1];
     }

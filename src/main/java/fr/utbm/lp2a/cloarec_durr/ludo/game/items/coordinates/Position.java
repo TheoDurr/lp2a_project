@@ -5,7 +5,7 @@ import fr.utbm.lp2a.cloarec_durr.ludo.game.utils.Color;
 
 /**
  * class for managing and storing the position of each piece in a relative base for each color
- * in this system, a Position is a couple of a Color and a progress. The progress is the amount of case runed since the start and the stable has the value -1
+ * in this system, a Position is a couple of a Color and a progress. The progress is the amount of case ran since the start and the stable has the value -1
  * @author Florian CLOAREC
  */
 
@@ -27,9 +27,6 @@ public class Position {
         return progress;
     }
 
-    public void setProgress(int progress) {
-        this.progress = progress;
-    }
 
     public Color getPlayerColor() {
         return playerColor;
